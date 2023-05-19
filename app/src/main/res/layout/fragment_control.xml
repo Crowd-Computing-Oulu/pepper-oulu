@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".control.ControlFragment">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <Button
+            android:id="@+id/btn_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/btn_turnright"
+            app:layout_constraintStart_toEndOf="@+id/btn_left"
+            app:layout_constraintTop_toTopOf="@+id/btn_forward" />
+
+        <Button
+            android:id="@+id/btn_turnaround"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/btn_turnaround"
+            app:layout_constraintStart_toEndOf="@+id/btn_right"
+            app:layout_constraintTop_toTopOf="@+id/btn_forward" />
+
+        <Button
+            android:id="@+id/btn_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/btn_turnleft"
+            app:layout_constraintStart_toEndOf="@+id/btn_forward"
+            app:layout_constraintTop_toTopOf="@+id/btn_forward" />
+
+        <Button
+            android:id="@+id/btn_forward"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/btn_forward"
+            app:layout_constraintStart_toStartOf="@+id/txt_movement"
+            app:layout_constraintTop_toBottomOf="@+id/txt_movement" />
+
+        <TextView
+            android:id="@+id/txt_movement"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_movement"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/txt_speech"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/txt_speech"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_forward" />
+
+        <EditText
+            android:id="@+id/txtfield_say"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:ems="10"
+            android:inputType="textPersonName"
+            app:layout_constraintStart_toStartOf="@+id/txt_speech"
+            app:layout_constraintTop_toBottomOf="@+id/txt_speech" />
+
+        <Button
+            android:id="@+id/btn_say"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@string/btn_say"
+            app:layout_constraintStart_toEndOf="@+id/txtfield_say"
+            app:layout_constraintTop_toTopOf="@+id/txtfield_say" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</FrameLayout>

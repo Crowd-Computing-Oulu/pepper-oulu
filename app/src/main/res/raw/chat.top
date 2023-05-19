@@ -1,0 +1,15 @@
+topic: ~chat ()
+
+u:(my name is _*) nice to meet you $1
+u:(I like _[chocolate cheese]) do you want to eat $1 now?
+
+# comment
+u:(what is your name) my name is Pepper
+u:(hello) hi
+u:(hello pepper) hello human
+u:(how are you) i feel good, boss
+u:(can you hear me) yes, i can
+u:(who is the boss) you are
+u:(ask me a question) do you like fish u1:(yes) it’s good for health u1:(no) i prefer meat
+
+u:([e:faceDetected “Hello”]) Hello!

@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#E7FAFF"
+    tools:context=".MainActivity">
+
+    <Button
+        android:id="@+id/btn_log"
+        style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:onClick="onAppSelectorPressed"
+        android:padding="0dp"
+        android:text="@string/btn_log"
+        android:textColor="#800085AD"
+        android:textColorHighlight="#00FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/btn_home"
+        app:layout_constraintTop_toTopOf="@+id/btn_home" />
+
+    <Button
+        android:id="@+id/btn_control"
+        style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:onClick="onAppSelectorPressed"
+        android:padding="0dp"
+        android:text="@string/btn_control"
+        android:textColor="#800085AD"
+        android:textColorHighlight="#00FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/btn_log"
+        app:layout_constraintTop_toTopOf="@+id/btn_log" />
+
+    <Button
+        android:id="@+id/btn_gpt_prototype"
+        style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:onClick="onAppSelectorPressed"
+        android:padding="0dp"
+        android:text="@string/btn_gpt_prototype"
+        android:textColor="#800085AD"
+        android:textColorHighlight="#00FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/btn_control"
+        app:layout_constraintTop_toTopOf="@+id/btn_control" />
+
+    <Button
+        android:id="@+id/btn_sona"
+        style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:onClick="onAppSelectorPressed"
+        android:padding="0dp"
+        android:text="@string/btn_sona"
+        android:textColor="#800085AD"
+        android:textColorHighlight="#00FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/btn_gpt_prototype"
+        app:layout_constraintTop_toTopOf="@+id/btn_control" />
+
+    <Button
+        android:id="@+id/btn_offline"
+        style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="40dp"
+        android:onClick="onAppSelectorPressed"
+        android:padding="0dp"
+        android:text="@string/btn_offline"
+        android:textColor="#800085AD"
+        android:textColorHighlight="#00FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/btn_gpt_prototype"
+        app:layout_constraintTop_toTopOf="@+id/btn_control" />
+
+    <Button
+        android:id="@+id/btn_home"
+        style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:foregroundTint="@color/design_default_color_on_primary"
+        android:onClick="onAppSelectorPressed"
+        android:padding="0dp"
+        android:text="@string/btn_home"
+        android:textColor="#800085AD"
+        android:textColorHighlight="#00FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <FrameLayout
+        android:id="@+id/fragment"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,0 +1,50 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 31
+    buildToolsVersion "31"
+
+    defaultConfig {
+        applicationId "fi.oulu.danielszabo.pepper_base"
+        minSdkVersion 23
+        targetSdkVersion 31
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+//    Basic Android imports
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+
+// Java backport
+    implementation group: 'com.github.seratch', name: 'java-time-backport', version: '1.0.0'
+
+//    Pepper-specific imports
+    implementation 'com.aldebaran:qisdk:1.7.5'
+    implementation 'com.aldebaran:qisdk-design:1.7.5'
+    implementation 'androidx.legacy:legacy-support-v4:1.0.0'
+    implementation "org.json:json:20230227"
+    implementation "com.theokanning.openai-gpt3-java:service:0.11.1"
+    implementation "org.thymeleaf:thymeleaf:3.1.1.RELEASE"
+    compileOnly  "org.projectlombok:lombok:1.18.26"
+    annotationProcessor 'org.projectlombok:lombok:1.18.26'
+    implementation 'androidx.cardview:cardview:1.0.0'
+}

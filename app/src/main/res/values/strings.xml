@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Pepper_Base</string>
+    <string name="app_version">1.0.0</string>
+    <string name="app_build">200123</string>
+
+    <string name="btn_back">Back</string>
+    <string name="btn_clear">Clear</string>
+
+    <string name="switch_error">Error</string>
+    <string name="switch_debug">Debug</string>
+    <string name="switch_warning">Warning</string>
+    <string name="switch_info">Info</string>
+
+    <string name="btn_home">Home</string>
+    <string name="btn_control">Control</string>
+    <string name="btn_log">Log</string>
+
+    <string name="btn_forward">Step Forward</string>
+    <string name="btn_turnleft">Turn Left</string>
+    <string name="btn_turnright">Turn Right</string>
+    <string name="btn_turnaround">Turn Around</string>
+    <string name="txt_movement">Movement</string>
+    <string name="txt_speech">Speech</string>
+    <string name="btn_say">Say</string>
+    <string name="btn_gpt_prototype">GPT</string>
+    <string name="btn_sona">Sona</string>
+    <string name="btn_offline">Offline</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+</resources>
