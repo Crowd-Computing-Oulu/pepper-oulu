@@ -28,15 +28,15 @@ This is the main screen of the universal application. It serves no particular pu
 
 ## Packages
 
-### fi.oulu.danielszabo.pepper.applications**
+### fi.oulu.danielszabo.pepper.applications
 
 This package contains all applications, including currently developed and legacy iterations, one-off and continuous projects. All of these can be launched from the application selector menu and while they share a lot of their tools, they all have different purpose.
 
-### fi.oulu.danielszabo.pepper.tools**
+### fi.oulu.danielszabo.pepper.tools
 
 This package contains code shared by applications, for example robot controls, dialogue management, API abstractions, animation calls.
 
-### fi.oulu.danielszabo.pepper.log**
+### fi.oulu.danielszabo.pepper.log
 
 This package contains our own logging solution.
 
