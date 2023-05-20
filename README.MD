@@ -2,17 +2,56 @@
 
 This repository contains the source code of the universal application running on University of Oulu's Pepper. This application contains a range of different screens for different purposes, and all iterations of our toolsets for promotional and experimental purposes.
 
-### Modules
+### Applications
 
-TODO: Write about each module in the project
+All of the applications, in reverse-chronological order:
+
+**itee_promotion_offline**
+
+This application is first to implement an offline dialogue management system to allow Pepper to become a very responsive and helpful agent of ITEE, promoting UBICOMP and Sona.
+
+**sona_promotion_gpt**
+
+This application builds on top of gpt_prototype's GPT3.5 Turbo implementation to allow Pepper to become a useful source of information about UBICOMP's Sona study participation management system.
+
+**gpt_prototype (deprecated)**
+
+The first application allowing Pepper to interface with the OpenAI API, both via GPT3 (completion) and GPT3.5 Turbo (dialogue).
+
+**control**
+
+This screen is meant to be used by the operator or developer to control the robot, for example to move it somewhere, make it say something or modify the configuration.
+
+**home**
+
+This is the main screen of the universal application. It serves no particular purpose other than letting the operator launch the desired application.
+
+### Packages
+
+**fi.oulu.danielszabo.pepper.applications**
+
+This package contains all applications, including currently developed and legacy iterations, one-off and continuous projects. All of these can be launched from the application selector menu and while they share a lot of their tools, they all have different purpose.
+
+**fi.oulu.danielszabo.pepper.tools**
+
+This package contains code shared by applications, for example robot controls, dialogue management, API abstractions, animation calls.
+
+**fi.oulu.danielszabo.pepper.log**
+
+This package contains our own logging solution.
 
 ### Setup and Usage
 
 TODO: Write step-by-step guide for setup and usage of the application
 
 ### System Requirements (Windows)
-
-TODO: Write system requirements for Windows
+Android Studio 3.4
+Pepper SDK 7
+OpenJDK 11
+Android Gradle Plugin 3.4.0
+Gradle 5.1.1
+Windows 10 (Version 10.0.19045.2846 ?)
+Intel CPU
 
 ### System Requirements (MacOS)
 
