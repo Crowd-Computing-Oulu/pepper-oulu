@@ -2,94 +2,109 @@
 
 This repository contains the source code of the universal application running on University of Oulu's Pepper. This application contains a range of different screens for different purposes, and all iterations of our toolsets for promotional and experimental purposes.
 
-### Applications
+## Applications
 
 All of the applications, in reverse-chronological order:
 
-**itee_promotion_offline**
+### itee_promotion_offline
 
 This application is first to implement an offline dialogue management system to allow Pepper to become a very responsive and helpful agent of ITEE, promoting UBICOMP and Sona.
 
-**sona_promotion_gpt**
+### sona_promotion_gpt
 
 This application builds on top of gpt_prototype's GPT3.5 Turbo implementation to allow Pepper to become a useful source of information about UBICOMP's Sona study participation management system.
 
-**gpt_prototype (deprecated)**
+### gpt_prototype (deprecated)
 
 The first application allowing Pepper to interface with the OpenAI API, both via GPT3 (completion) and GPT3.5 Turbo (dialogue).
 
-**control**
+### control
 
 This screen is meant to be used by the operator or developer to control the robot, for example to move it somewhere, make it say something or modify the configuration.
 
-**home**
+### home
 
 This is the main screen of the universal application. It serves no particular purpose other than letting the operator launch the desired application.
 
-### Packages
+## Packages
 
-**fi.oulu.danielszabo.pepper.applications**
+### fi.oulu.danielszabo.pepper.applications**
 
 This package contains all applications, including currently developed and legacy iterations, one-off and continuous projects. All of these can be launched from the application selector menu and while they share a lot of their tools, they all have different purpose.
 
-**fi.oulu.danielszabo.pepper.tools**
+### fi.oulu.danielszabo.pepper.tools**
 
 This package contains code shared by applications, for example robot controls, dialogue management, API abstractions, animation calls.
 
-**fi.oulu.danielszabo.pepper.log**
+### fi.oulu.danielszabo.pepper.log**
 
 This package contains our own logging solution.
 
-### Setup and Usage
+## Setup and Usage
 
 TODO: Write step-by-step guide for setup and usage of the application
 
-### System Requirements (Windows)
-Android Studio 3.4
-Pepper SDK 7
-OpenJDK 11
-Android Gradle Plugin 3.4.0
-Gradle 5.1.1
-Windows 10 (Version 10.0.19045.2846 ?)
-Intel CPU
+## System Requirements (Windows)
+- Android Studio 3.4
+- Pepper SDK 7
+- OpenJDK 11
+- Android Gradle Plugin 3.4.0
+- Gradle 5.1.1
+- Windows 10 (Version 10.0.19045.2846 ?)
+- Intel CPU
 
-### System Requirements (MacOS)
+## System Requirements (MacOS)
 
 I have not been able to launch the emulator successfully on MacOS yet.
 
-### System Requirements (Linux)
+## System Requirements (Linux)
 
-Android Studio 3.6.3
-Pepper SDK 7
-Oracle JRE 8 (See below)
-Android Gradle Plugin 3.6.3
-Gradle 5.6.4
-KVM (see below)
-Pop!_OS 22.04 LTS
-Intel CPU
+- Android Studio 3.6.3
+- Pepper SDK 7
+- Oracle JRE 8 (See below)
+- Android Gradle Plugin 3.6.3
+- Gradle 5.6.4
+- KVM (see below)
+- Pop!_OS 22.04 LTS
+- Intel CPU
 
-**KVM**
-Install KVM
-    `sudo apt install qemu-kvm`
-Add yourself to the kvm group
-    `sudo adduser yourusername kvm`
-Relink the correct libraries
-Navigate to the API lib folder
-   `cd /home/$USER/.local/share/Softbank Robotics/RobotSDK/API 7/tools/lib`
-Back up the old library
-    `mv libz.so.1 libz.so.1.bak`
-Relink the System one
-    `ln -s /usr/lib/x86_64-linux-gnu/libz.so libz.so.1`
-Restart Android Studio & start the Emulator
+### KVM
 
-**JDK 8**
+1. Install KVM
+
+`sudo apt install qemu-kvm`
+
+2. Add yourself to the kvm group
+
+`sudo adduser yourusername kvm`
+
+Relink the correct libraries:
+
+3. Navigate to the API lib folder
+
+`cd /home/$USER/.local/share/Softbank Robotics/RobotSDK/API 7/tools/lib`
+
+4. Back up the old library
+
+`mv libz.so.1 libz.so.1.bak`
+
+5. Relink the System one
+
+`ln -s /usr/lib/x86_64-linux-gnu/libz.so libz.so.1`
+
+6. Restart Android Studio & start the Emulator
+
+### JDK 8
+
 Download Oracle JRE: https://www.java.com/en/download/manual.jsp
+
 And then launch Android Studio 3.6.3 using this JRE:
-    `STUDIO_JDK=/usr/local/java/ ~/dev/android-studio-3.6.3/bin/studio.sh`
 
-### Potential Issues
+`STUDIO_JDK=/usr/local/java/ ~/dev/android-studio-3.6.3/bin/studio.sh`
 
-#### App not installing to emulator
+## Potential Issues
+
+### App not installing to emulator
 
 ```
 Device emulator-5574 disconnected, monitoring stopped.
