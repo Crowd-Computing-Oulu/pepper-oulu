@@ -5,7 +5,7 @@
     android:id="@+id/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".itee_promotion_offline.ITEEPromotionFragment">
+    tools:context=".applications.itee_promotion_offline.ITEEPromotionFragment">
 
     <Button
         android:id="@+id/button_start"
