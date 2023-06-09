@@ -21,7 +21,15 @@ public class SpeechInput {
 
     private static Future<ListenResult> currentListen = null;
 
+//    these two allow us to pause the listen and restart it
+    private static Consumer<ListenResult> callback;
+    private static String[] options;
+
     public static void selectOption(Consumer<ListenResult> callback, String... options) {
+
+        SpeechInput.callback = callback;
+        SpeechInput.options = options;
+
         if(isListening()){
             LOG.error(SpeechInput.class, "Pepper is already listening!");
             cancelListen();
@@ -37,21 +45,34 @@ public class SpeechInput {
                             .withTexts(options[i])
                             .build());
                 }
-                currentListen = ListenBuilder.with((PepperApplication.qiContext)).withPhraseSets(phraseSets).build().async().run();
+                StringBuilder log = new StringBuilder("Listening for phraseSetList (selectOption):");
+                for (int i = 0; i < phraseSets.size(); i++) {
+                    log.append("\n").append(i).append(" - ").append(phraseSets.get(i).getPhrases());
+                }
+                LOG.debug(SpeechInput.class, log.toString());
                 try {
-                    currentListen.andThenConsume(callback).andThenConsume(__ -> {
+                    (currentListen = ListenBuilder
+                            .with((PepperApplication.qiContext))
+                            .withPhraseSets(phraseSets)
+                            .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                            .build()
+                            .async()
+                            .run())
+                            .andThenConsume(callback).andThenConsume(__ -> {
                         currentListen.cancel(false);
                         currentListen = null;
                     });
-
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             });
         }
     }
 
     public static void selectOptionWithPhraseSets(Consumer<ListenResult> callback, String[] options, String[][] phraseSets) {
+
+        SpeechInput.callback = callback;
+        SpeechInput.options = options;
 
         if(isListening()){
             LOG.warning(SpeechInput.class, "Pepper is already listening!");
@@ -83,28 +104,25 @@ public class SpeechInput {
                             .build());
                 }
 
-                StringBuilder log = new StringBuilder("Listening for phraseSetList:");
+                StringBuilder log = new StringBuilder("Listening for phraseSetList (selectOptionWithPhraseSets):");
                 for (int i = 0; i < phraseSets.length; i++) {
                     log.append("\n").append(i).append(" - ").append(Arrays.toString(phraseSets[i]));
                 }
                 LOG.debug(SpeechInput.class, log.toString());
-
-                currentListen = ListenBuilder
-                        .with((PepperApplication.qiContext))
-                        .withPhraseSets(phraseSetList)
-                        .withBodyLanguageOption(BodyLanguageOption.DISABLED)
-                        .build()
-                        .async()
-                        .run();
-
-
                 try {
-                    currentListen.andThenConsume(callback).andThenConsume(__ -> {
-                        currentListen.cancel(false);
-                        currentListen = null;
-                    });
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+                    (currentListen = ListenBuilder
+                            .with((PepperApplication.qiContext))
+                            .withPhraseSets(phraseSetList)
+                            .withBodyLanguageOption(BodyLanguageOption.DISABLED)
+                            .build()
+                            .async()
+                            .run())
+                            .andThenConsume(callback).andThenConsume(__ -> {
+                                currentListen.cancel(false);
+                                currentListen = null;
+                            });
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             });
         }
@@ -114,14 +132,24 @@ public class SpeechInput {
         return currentListen != null;
     }
 
-
-    public static void pauseWhile() {
+    public static void pauseWhile(Runnable runnable) {
+        LOG.debug(SimpleController.class.getSimpleName(), "Pausing Listen");
+//        cancel currently ongoing speech input (if there is one)
         cancelListen();
+//        run whatever the caller wanted
+        runnable.run();
+        LOG.debug(SimpleController.class.getSimpleName(), "Continuing Listen");
+//        restart the speech input if needed
+        if(callback != null && options != null) {
+            selectOption(callback, options);
+        }
     }
 
     public static void cancelListen() {
-        LOG.warning(SpeechInput.class, "Listen Cancelled.");
-        if(currentListen != null) currentListen.cancel(true);
-        currentListen = null;
+        if(isListening()) {
+            currentListen.cancel(true);
+            LOG.warning(SpeechInput.class, "Listen Cancelled.");
+            currentListen = null;
+        }
     }
 }

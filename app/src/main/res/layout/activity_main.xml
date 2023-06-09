@@ -79,6 +79,20 @@
         app:layout_constraintTop_toTopOf="@+id/btn_control" />
 
     <Button
+        android:id="@+id/btn_study"
+        style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:onClick="onAppSelectorPressed"
+        android:padding="0dp"
+        android:text="@string/btn_study"
+        android:textColor="#800085AD"
+        android:textColorHighlight="#00FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@+id/btn_offline"
+        app:layout_constraintTop_toTopOf="@+id/btn_control" />
+
+    <Button
         android:id="@+id/btn_home"
         style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
         android:layout_width="40dp"

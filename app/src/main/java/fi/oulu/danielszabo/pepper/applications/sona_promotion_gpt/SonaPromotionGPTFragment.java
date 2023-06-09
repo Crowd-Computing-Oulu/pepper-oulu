@@ -86,11 +86,11 @@ public class SonaPromotionGPTFragment extends Fragment {
         optionNumbers[4] = view.findViewById(R.id.txt_option_num5);
 
         for (int i = 0; i < largeButtons.length; i++) {
-            largeButtons[i].setOnClickListener(v -> onOptionSelected(v));
+            largeButtons[i].setOnClickListener(this::onOptionSelected);
         }
 
         smallButtons[0] = view.findViewById(R.id.button_start);
-        smallButtons[0].setOnClickListener(v -> onStartButtonPressed(v));
+        smallButtons[0].setOnClickListener(this::onStartButtonPressed);
 
         init();
 
@@ -110,10 +110,8 @@ public class SonaPromotionGPTFragment extends Fragment {
                 if (contextualOptions.length > i) {
                     largeButtons[i].setText(contextualOptions[i]);
                     largeButtons[i].setVisibility(View.VISIBLE);
-//                    optionNumbers[i].setVisibility(View.VISIBLE);
                 } else {
                     largeButtons[i].setVisibility(View.INVISIBLE);
-//                    optionNumbers[i].setVisibility(View.INVISIBLE);
                 }
             }
         });
@@ -131,7 +129,7 @@ public class SonaPromotionGPTFragment extends Fragment {
 
     }
 
-    public void onStartButtonPressed(View view) {
+    private void onStartButtonPressed(View view) {
         init();
 
         AsyncTask.execute(() -> {
@@ -139,7 +137,7 @@ public class SonaPromotionGPTFragment extends Fragment {
         });
     }
 
-    public void onOptionSelected(View view) {
+    private void onOptionSelected(View view) {
         SpeechInput.cancelListen();
         onOptionSelected(((Button) view).getText().toString());
     }
@@ -177,10 +175,8 @@ public class SonaPromotionGPTFragment extends Fragment {
                         if(contextualOptions.length > i) {
                             largeButtons[i].setText(contextualOptions[i]);
                             largeButtons[i].setVisibility(View.VISIBLE);
-//                            optionNumbers[i].setVisibility(View.VISIBLE);
                         } else {
                             largeButtons[i].setVisibility(View.GONE);
-//                            optionNumbers[i].setVisibility(View.GONE);
                         }
                     }
                 });

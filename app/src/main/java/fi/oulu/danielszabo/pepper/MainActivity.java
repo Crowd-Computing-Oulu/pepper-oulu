@@ -14,6 +14,7 @@ import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 
 import fi.oulu.danielszabo.pepper.applications.control.ControlFragment;
+import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.PepperStudyPromotionFragment;
 import fi.oulu.danielszabo.pepper.tools.SpeechInput;
 import fi.oulu.danielszabo.pepper.applications.gpt_prototype.GPTFragment;
 import fi.oulu.danielszabo.pepper.applications.home.HomeFragment;
@@ -37,8 +38,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
         // Set activity layout
         setContentView(R.layout.activity_main);
-
-        SpeechInput.selectOption(System.out::println, "Hello");
 
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
@@ -75,6 +74,10 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                 newFragment = new ITEEPromotionFragment();
                 break;
             }
+            case R.id.btn_study: {
+                newFragment = new PepperStudyPromotionFragment();
+                break;
+            }
             default: {
                 newFragment = new HomeFragment();
                 break;
@@ -104,7 +107,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         LOG.debug(this,"Qi Context Created");
 
 //      setting default fragment
-        onAppSelectorPressed(findViewById(R.id.btn_offline));
+        onAppSelectorPressed(findViewById(R.id.btn_study));
     }
 
 

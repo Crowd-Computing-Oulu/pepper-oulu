@@ -6,11 +6,15 @@ This repository contains the source code of the universal application running on
 
 All of the applications, in reverse-chronological order:
 
-### itee_promotion_offline
+### pepper_study_promotion
+
+This latest application showcases Pepper's ability to converse offline, produce answers via GPT 3.5 Turbo and respond to touch via her touch sensors. This application allows Pepper to converse lightly about ITEE and UBICOMP and entertain the users, with the goal of attracting people to a cause, which at the time of the implementation is the ide collection survey for our first study.
+
+### itee_promotion_offline (deprecated)
 
 This application is first to implement an offline dialogue management system to allow Pepper to become a very responsive and helpful agent of ITEE, promoting UBICOMP and Sona.
 
-### sona_promotion_gpt
+### sona_promotion_gpt (deprecated)
 
 This application builds on top of gpt_prototype's GPT3.5 Turbo implementation to allow Pepper to become a useful source of information about UBICOMP's Sona study participation management system.
 

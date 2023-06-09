@@ -8,6 +8,7 @@ import com.aldebaran.qi.sdk.builder.SayBuilder;
 
 import fi.oulu.danielszabo.pepper.PepperApplication;
 import fi.oulu.danielszabo.pepper.R;
+import fi.oulu.danielszabo.pepper.log.LOG;
 
 public class SimpleController {
 
@@ -15,13 +16,28 @@ public class SimpleController {
 
     private static Future currentSay = null;
 
-    public static SimpleController say(Consumer<Void> then, String text) {
+    public static SimpleController say(Consumer<Void> then, final String text) {
+        if(SpeechInput.isListening()) {
 
+            SpeechInput.pauseWhile(() -> {
+                String[] options = text.split(";");
+                String randomlySelectedOption = options[(int)(Math.random()*options.length)];
+                SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
+                        .withText("\\rspd=90\\ \\vct=100\\" + randomlySelectedOption) // Set the text to say.
+                        .build().run();
+                currentSay = null;
+                try {
+                    then.consume(null);
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            });
+        } else {
+            SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
+                    .withText("\\rspd=90\\ \\vct=100\\" + text) // Set the text to say.
+                    .buildAsync().andThenConsume(say -> currentSay = say.async().run().andThenConsume(__ -> currentSay = null).andThenConsume(then));
+        }
 
-        text = "\\rspd=90\\ \\vct=100\\" + text;
-        SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
-                .withText(text) // Set the text to say.
-                .buildAsync().andThenConsume(say -> currentSay = say.async().run().andThenConsume(__ -> currentSay = null).andThenConsume(then));
         return INSTANCE;
     }
 
@@ -102,7 +118,7 @@ public class SimpleController {
     }
 
     public static SimpleController setWheelLock(boolean lock) {
-
+        // TODO: implement somehow?
         return INSTANCE;
     }
 }
