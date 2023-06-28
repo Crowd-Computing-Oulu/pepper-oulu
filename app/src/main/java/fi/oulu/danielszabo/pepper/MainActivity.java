@@ -2,6 +2,7 @@ package fi.oulu.danielszabo.pepper;
 
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 
 import androidx.fragment.app.Fragment;
@@ -29,19 +30,18 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-
-        LOG.debug(this, "onCreate" );
-
         super.onCreate(savedInstanceState);
 
-        this.fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
+        LOG.debug(this, "onCreate");
 
-        // Set activity layout
-        setContentView(R.layout.activity_main);
 
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
 
+        // Set activity layout
+        setContentView(R.layout.activity_main);
+
+        this.fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
     }
 
     public void onAppSelectorPressed(View view) {
@@ -85,9 +85,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         }
         fragmentTransaction.replace(R.id.fragment, newFragment, this.getClass().getSimpleName());
         fragmentTransaction.commit();
-
     }
-
 
     @Override
     protected void onDestroy() {
@@ -98,33 +96,30 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
 
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
-        // The robot focus is gained.
-        LOG.debug(this, "onRobotFocusGained" );
+        LOG.debug(this, "onRobotFocusGained");
+//        LOG.debug(LOG.class.getSimpleName(), "LogListener added: " + (LOG.getLogListenerHashMap().containsKey("logView")));
 
-        // Store context object in global application state, initialize whole app
+        // Store context object in global application state, initialize the whole app
         PepperApplication.initialize(qiContext);
 
-        LOG.debug(this,"Qi Context Created");
+        LOG.debug(this, "Qi Context Created");
 
-//      setting default fragment
+        // Set default fragment
         onAppSelectorPressed(findViewById(R.id.btn_study));
     }
 
-
     @Override
     public void onRobotFocusLost() {
-        // The robot focus is lost.
-        LOG.debug(this, "onRobotFocusLost" );
+        LOG.debug(this, "onRobotFocusLost");
     }
 
     @Override
     public void onRobotFocusRefused(String reason) {
-        // The robot focus is refused.
-        LOG.debug(this, "onRobotFocusRefused: " + reason );
+        LOG.debug(this, "onRobotFocusRefused: " + reason);
     }
 
     @Override
     public void onFragmentInteraction(Uri uri) {
-        LOG.debug(this, "onFragmentInteraction: " + uri );
+        LOG.debug(this, "onFragmentInteraction: " + uri);
     }
 }

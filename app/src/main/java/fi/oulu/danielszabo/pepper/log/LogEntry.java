@@ -1,19 +1,32 @@
 package fi.oulu.danielszabo.pepper.log;
 
-
-import java.text.FieldPosition;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class LogEntry {
 
-    enum LogLevel {
-        INFO, DEBUG, WARNING, ERROR
+    public enum LogLevel {
+        INFO, DEBUG, WARNING, ERROR;
+
+        public static LogLevel extractLogLevelFromString(String logEntry) {
+            if (logEntry.contains("INFO")) {
+                return INFO;
+            } else if (logEntry.contains("DEBUG")) {
+                return DEBUG;
+            } else if (logEntry.contains("WARNING")) {
+                return WARNING;
+            } else if (logEntry.contains("ERROR")) {
+                return ERROR;
+            }
+
+            return DEBUG; // Default log level if extraction fails
+        }
     }
 
-    LogLevel logLevel;
-    String tag, message;
-    long time;
+    private LogLevel logLevel;
+    private String tag;
+    private String message;
+    private long time;
 
     public LogEntry(LogLevel logLevel, String tag, String message, long time) {
         this.logLevel = logLevel;
@@ -22,14 +35,15 @@ public class LogEntry {
         this.time = time;
     }
 
+    public LogLevel getLogLevel() {
+        return logLevel;
+    }
+
     @Override
     public String toString() {
-        StringBuffer stringBuffer = new StringBuffer();
-        Date now = new Date(this.time);
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
+        String formattedTime = dateFormat.format(new Date(time));
 
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
-        simpleDateFormat.format(now, stringBuffer, new FieldPosition(0));
-
-        return "[" + stringBuffer + " " + this.logLevel + " " + this.tag + "] " + this.message;
+        return "[" + formattedTime + " " + logLevel + " " + tag + "] " + message;
     }
 }

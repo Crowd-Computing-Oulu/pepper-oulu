@@ -1,5 +1,6 @@
 package fi.oulu.danielszabo.pepper.log;
 
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -9,10 +10,16 @@ import java.util.Map;
 
 public class LOG {
 
+    private static final String TAG = "LOG";
+
+    private static boolean isDebugLogEnabled = false;
+    private static boolean isInfoLogEnabled = false;
+    private static boolean isWarningLogEnabled = false;
+    private static boolean isErrorLogEnabled = false;
+
+
     public static List<LogEntry> logEntryList = new ArrayList<>();
-
-    public static Map<String, LogListener> logListenerHashMap = new HashMap<>();
-
+    private static Map<String, LogListener> logListenerHashMap = new HashMap<>();
 
     public static void addListener(String key, LogListener listener) {
         logListenerHashMap.put(key, listener);
@@ -26,7 +33,7 @@ public class LOG {
 
     public static void info(Object context, String message) {
         if (context instanceof Class) {
-            info(((Class) context).getSimpleName(), message);
+            info(((Class<?>) context).getSimpleName(), message);
         } else {
             info(context.getClass().getSimpleName(), message);
         }
@@ -34,7 +41,7 @@ public class LOG {
 
     public static void debug(Object context, String message) {
         if (context instanceof Class) {
-            debug(((Class) context).getSimpleName(), message);
+            debug(((Class<?>) context).getSimpleName(), message);
         } else {
             debug(context.getClass().getSimpleName(), message);
         }
@@ -42,7 +49,7 @@ public class LOG {
 
     public static void warning(Object context, String message) {
         if (context instanceof Class) {
-            warning(((Class) context).getSimpleName(), message);
+            warning(((Class<?>) context).getSimpleName(), message);
         } else {
             warning(context.getClass().getSimpleName(), message);
         }
@@ -50,7 +57,7 @@ public class LOG {
 
     public static void error(Object context, String message) {
         if (context instanceof Class) {
-            error(((Class) context).getSimpleName(), message);
+            error(((Class<?>) context).getSimpleName(), message);
         } else {
             error(context.getClass().getSimpleName(), message);
         }
@@ -66,11 +73,11 @@ public class LOG {
                 new Date().getTime()
         );
 
-        LOG.logEntryList.add(
-                logEntry
-        );
-
+        logEntryList.add(logEntry);
         notifyListeners(logEntry);
+
+        // Debug statement to verify the execution of the info() method
+        Log.d(TAG, "Info message logged: " + message);
     }
 
     public static void debug(String tag, String message) {
@@ -83,11 +90,12 @@ public class LOG {
                 new Date().getTime()
         );
 
-        LOG.logEntryList.add(
-                logEntry
-        );
-
+        logEntryList.add(logEntry);
         notifyListeners(logEntry);
+
+        // Debug statement to verify the execution of the debug() method
+        Log.d(TAG, "Debug message logged: " + message);
+
     }
 
     public static void warning(String tag, String message) {
@@ -100,11 +108,12 @@ public class LOG {
                 new Date().getTime()
         );
 
-        LOG.logEntryList.add(
-                logEntry
-        );
-
+        logEntryList.add(logEntry);
         notifyListeners(logEntry);
+
+        // Debug statement to verify the execution of the warning() method
+        Log.d(TAG, "Warning message logged: " + message);
+
     }
 
     public static void error(String tag, String message) {
@@ -117,13 +126,12 @@ public class LOG {
                 new Date().getTime()
         );
 
-        LOG.logEntryList.add(
-                logEntry
-        );
-
+        logEntryList.add(logEntry);
         notifyListeners(logEntry);
-    }
 
+        // Debug statement to verify the execution of the error() method
+        Log.d(TAG, "Error message logged: " + message);
+    }
 
     public static void removeListener(String key) {
         logListenerHashMap.remove(key);
@@ -131,5 +139,21 @@ public class LOG {
 
     public static Map<String, LogListener> getLogListenerHashMap() {
         return logListenerHashMap;
+    }
+
+    public static void enableDebugLog(boolean enable) {
+        isDebugLogEnabled = enable;
+    }
+
+    public static void enableInfoLog(boolean enable) {
+        isInfoLogEnabled = enable;
+    }
+
+    public static void enableWarningLog(boolean enable) {
+        isWarningLogEnabled = enable;
+    }
+
+    public static void enableErrorLog(boolean enable) {
+        isErrorLogEnabled = enable;
     }
 }
