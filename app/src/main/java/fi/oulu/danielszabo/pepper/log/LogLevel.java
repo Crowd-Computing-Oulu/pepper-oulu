@@ -14,6 +14,6 @@ public enum LogLevel {
             return ERROR;
         }
 
-        return null; // Return null if log level extraction fails
+        return null;
     }
 }

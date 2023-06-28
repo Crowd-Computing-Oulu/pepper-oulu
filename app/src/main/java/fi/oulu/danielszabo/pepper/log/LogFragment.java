@@ -97,7 +97,7 @@ public class LogFragment extends Fragment {
         return view;
     }
 
-    // Method to refresh the logTextView based on the showDebugLogs, showInfoLogs, showWarningLogs, and showErrorLogs flags
+    // Method to refresh the logTextView
     private void refreshLogTextView() {
         logTextView.setText("");
         for (String logEntry : logEntries) {
