@@ -54,7 +54,7 @@ public class LogFragment extends Fragment {
             logTextView.append(logEntry.toString() + "\n");
         }
 
-        // Add a log listener to update the logTextView with new log entries
+        // Add a log listener to update the logTextView
         LOG.addListener("logView", logEntry -> {
             logEntries.add(logEntry.toString());
             if (shouldDisplayLog(extractLogLevelFromString(logEntry.toString()))) {

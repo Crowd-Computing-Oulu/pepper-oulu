@@ -97,7 +97,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     @Override
     public void onRobotFocusGained(QiContext qiContext) {
         LOG.debug(this, "onRobotFocusGained");
-//        LOG.debug(LOG.class.getSimpleName(), "LogListener added: " + (LOG.getLogListenerHashMap().containsKey("logView")));
 
         // Store context object in global application state, initialize the whole app
         PepperApplication.initialize(qiContext);
