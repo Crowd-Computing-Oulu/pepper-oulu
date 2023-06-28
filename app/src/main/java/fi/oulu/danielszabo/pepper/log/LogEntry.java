@@ -24,7 +24,6 @@ public class LogEntry {
 
     @Override
     public String toString() {
-
         StringBuffer stringBuffer = new StringBuffer();
         Date now = new Date(this.time);
 

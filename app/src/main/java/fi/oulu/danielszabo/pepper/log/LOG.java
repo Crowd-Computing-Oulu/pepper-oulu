@@ -128,4 +128,8 @@ public class LOG {
     public static void removeListener(String key) {
         logListenerHashMap.remove(key);
     }
+
+    public static Map<String, LogListener> getLogListenerHashMap() {
+        return logListenerHashMap;
+    }
 }
