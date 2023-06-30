@@ -116,3 +116,6 @@ Error while Installing APK
 ```
 
 Reinstall API 7, or reset to default state (keep clean copy).
+
+### JAVA error 
+If you have multiple installations of JDK, please ensure that you add the appropriate version's location using the project structure settings.
