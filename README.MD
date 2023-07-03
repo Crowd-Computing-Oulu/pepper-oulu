@@ -116,3 +116,52 @@ Error while Installing APK
 ```
 
 Reinstall API 7, or reset to default state (keep clean copy).
+
+### Gradle sync issues due to incompatible dependency versions.
+
+When creating a new project, the default configuration fails to sync with Gradle as the dependency versions are not compatible with Gradle 5.1.1. This issue could be solved by using the latest supported dependencies for gradle 5.1.1.
+
+The default config of the build.gradle(module) file could be replaced with the following for a quick fix:
+```
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 34
+    buildToolsVersion "34.0.0"
+    defaultConfig {
+        applicationId "com.example.myapplication"
+        minSdkVersion 23
+        targetSdkVersion 34
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        targetCompatibility = '1.8'
+        sourceCompatibility = '1.8'
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+//    Use this version for app compact
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+    testImplementation 'junit:junit:4.12'
+
+//    latest supported versions for gradle 5.1.1 for test implementations
+    androidTestImplementation 'androidx.test:runner:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.2.0'
+
+//    Pepper imports
+	implementation 'com.aldebaran:qisdk:1.7.5'
+	implementation 'com.aldebaran:qisdk-design:1.7.5'
+}
+```
