@@ -117,5 +117,5 @@ Error while Installing APK
 
 Reinstall API 7, or reset to default state (keep clean copy).
 
-### JAVA compiler error 
+### Compilation Failure: Unrecognized Attribute Name 
 If you have multiple installations of JDK, please ensure that you add the appropriate version's location using the project structure settings.
