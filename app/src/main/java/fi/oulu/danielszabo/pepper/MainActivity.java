@@ -4,6 +4,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -16,6 +17,7 @@ import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 
 import fi.oulu.danielszabo.pepper.applications.control.ControlFragment;
 import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.PepperStudyPromotionFragment;
+import fi.oulu.danielszabo.pepper.tools.SimpleController;
 import fi.oulu.danielszabo.pepper.tools.SpeechInput;
 import fi.oulu.danielszabo.pepper.applications.gpt_prototype.GPTFragment;
 import fi.oulu.danielszabo.pepper.applications.home.HomeFragment;
@@ -27,6 +29,8 @@ import fi.oulu.danielszabo.pepper.applications.sona_promotion_gpt.SonaPromotionG
 public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks, LogFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener, ControlFragment.OnFragmentInteractionListener {
 
     private Fragment fragment;
+    private ImageButton btnVolume;
+    private boolean isMuted = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +46,21 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         setContentView(R.layout.activity_main);
 
         this.fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
+
+        // Add mute button
+        btnVolume = findViewById(R.id.btn_volume);
+        btnVolume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isMuted = !isMuted;
+                if (isMuted) {
+                    btnVolume.setImageResource(R.drawable.ic_volume_off);
+                    SimpleController.cancelSay();
+                } else {
+                    btnVolume.setImageResource(R.drawable.ic_volume_on);
+                }
+            }
+        });
     }
 
     public void onAppSelectorPressed(View view) {

@@ -92,6 +92,30 @@
         app:layout_constraintStart_toEndOf="@+id/btn_offline"
         app:layout_constraintTop_toTopOf="@+id/btn_control" />
 
+    <ImageButton
+        android:id="@+id/btn_volume"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_volume_on"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/btn_mute"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_home"
+        app:layout_constraintEnd_toStartOf="@id/btn_help"
+        app:layout_constraintTop_toTopOf="@id/btn_home" />
+
+    <ImageButton
+        android:id="@+id/btn_help"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_help"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/btn_mute"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_home" />
+
     <Button
         android:id="@+id/btn_home"
         style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
