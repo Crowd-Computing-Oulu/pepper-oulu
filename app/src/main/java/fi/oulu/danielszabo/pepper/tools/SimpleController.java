@@ -46,8 +46,10 @@ public class SimpleController {
     }
 
     public static SimpleController cancelSay() {
-        currentSay.cancel(true);
-        currentSay = null;
+        if (currentSay != null) {
+            currentSay.cancel(true);
+            currentSay = null;
+        }
         return INSTANCE;
     }
 

@@ -131,6 +131,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
+
     <FrameLayout
         android:id="@+id/fragment"
         android:layout_width="0dp"

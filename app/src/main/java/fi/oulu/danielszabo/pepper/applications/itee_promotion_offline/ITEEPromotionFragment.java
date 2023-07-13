@@ -39,6 +39,8 @@ public class ITEEPromotionFragment extends Fragment {
     private Stack<ResponseWithOptions> responseStack = new Stack<>();
     private ResponseWithOptions currentResponse;
 
+    private Button buttonSkip;
+
 //    initialise hidden, global options and their phrase sets
     static {
         hiddenOptions = new String[]{
@@ -98,7 +100,8 @@ public class ITEEPromotionFragment extends Fragment {
 
         instructionText = view.findViewById(R.id.txt_instruction);
         captionText = view.findViewById(R.id.txt_caption);
-
+        buttonSkip = view.findViewById(R.id.button_skip);
+        
         largeButtons[0] = view.findViewById(R.id.button_lg_1);
         largeButtons[1] = view.findViewById(R.id.button_lg_2);
         largeButtons[2] = view.findViewById(R.id.button_lg_3);
@@ -146,6 +149,7 @@ public class ITEEPromotionFragment extends Fragment {
             setCaptionsVisible(false);
             setOptionsVisible(true);
             smallButtons[0].setVisibility(View.INVISIBLE);
+            buttonSkip.setVisibility(View.INVISIBLE);
         });
 
         SpeechInput.selectOptionWithPhraseSets(r -> onOptionSelected(r.getHeardPhrase().getText())
@@ -207,6 +211,7 @@ public class ITEEPromotionFragment extends Fragment {
                                     captionText.setVisibility(View.INVISIBLE);
                                     setCaptionsVisible(false);
                                     setOptionsVisible(true);
+                                     buttonSkip.setVisibility(View.INVISIBLE);
                                 });
 
                                 SpeechInput.selectOptionWithPhraseSets(r -> onOptionSelected(r.getHeardPhrase().getText())
@@ -294,6 +299,7 @@ public class ITEEPromotionFragment extends Fragment {
             captionText.setText(currentResponse.getResponseText());
             setCaptionsVisible(true);
             setOptionsVisible(false);
+            buttonSkip.setVisibility(View.VISIBLE);
         });
 
         SimpleController.say(__ -> {
@@ -312,6 +318,7 @@ public class ITEEPromotionFragment extends Fragment {
                 captionText.setVisibility(View.INVISIBLE);
                 setCaptionsVisible(false);
                 setOptionsVisible(true);
+                buttonSkip.setVisibility(View.INVISIBLE);
             });
 
             SpeechInput.selectOptionWithPhraseSets(r -> onOptionSelected(r.getHeardPhrase().getText())
