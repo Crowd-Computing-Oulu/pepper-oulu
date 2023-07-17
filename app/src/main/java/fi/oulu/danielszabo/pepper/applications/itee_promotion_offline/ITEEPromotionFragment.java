@@ -39,7 +39,9 @@ public class ITEEPromotionFragment extends Fragment {
     private Stack<ResponseWithOptions> responseStack = new Stack<>();
     private ResponseWithOptions currentResponse;
 
-//    initialise hidden, global options and their phrase sets
+    private Button buttonSkip;
+
+    //    initialise hidden, global options and their phrase sets
     static {
         hiddenOptions = new String[]{
                 "GO_BACK",
@@ -98,6 +100,7 @@ public class ITEEPromotionFragment extends Fragment {
 
         instructionText = view.findViewById(R.id.txt_instruction);
         captionText = view.findViewById(R.id.txt_caption);
+        buttonSkip = view.findViewById(R.id.button_skip);
 
         largeButtons[0] = view.findViewById(R.id.button_lg_1);
         largeButtons[1] = view.findViewById(R.id.button_lg_2);
@@ -120,7 +123,43 @@ public class ITEEPromotionFragment extends Fragment {
 
         initConv();
 
+        buttonSkip = view.findViewById(R.id.button_skip);
+        buttonSkip.setOnClickListener(v -> onSkipButtonPressed(v));
+
+
         return view;
+    }
+
+    private void onSkipButtonPressed(View view) {
+        // Stop any ongoing speech output
+        SimpleController.stopSpeaking();
+
+        updateUIWithoutResponse();
+    }
+
+    private void updateUIWithoutResponse() {
+        runOnUiThread(() -> {
+            // Update UI elements without Pepper speaking a response
+            for (int i = 0; i < largeButtons.length; i++) {
+                if (displayedContextualOptions.length > i) {
+                    largeButtons[i].setText(displayedContextualOptions[i]);
+                    largeButtons[i].setVisibility(View.VISIBLE);
+                } else {
+                    largeButtons[i].setVisibility(View.GONE);
+                }
+            }
+
+            captionText.setVisibility(View.INVISIBLE);
+            setCaptionsVisible(false);
+            setOptionsVisible(true);
+            buttonSkip.setVisibility(View.INVISIBLE);
+
+
+            SpeechInput.selectOptionWithPhraseSets(r -> onOptionSelected(r.getHeardPhrase().getText())
+                    , displayedContextualOptions, allOptionPhraseSets());
+        });
+
+        SpeechInput.selectOptionWithPhraseSets(r -> onOptionSelected(r.getHeardPhrase().getText()), displayedContextualOptions, allOptionPhraseSets());
     }
 
     private void initConv() {
@@ -146,6 +185,7 @@ public class ITEEPromotionFragment extends Fragment {
             setCaptionsVisible(false);
             setOptionsVisible(true);
             smallButtons[0].setVisibility(View.INVISIBLE);
+            buttonSkip.setVisibility(View.INVISIBLE);
         });
 
         SpeechInput.selectOptionWithPhraseSets(r -> onOptionSelected(r.getHeardPhrase().getText())
@@ -203,10 +243,11 @@ public class ITEEPromotionFragment extends Fragment {
 
                             SimpleController.say(__ -> {
 //                                hide captions again when done talking
-                                 runOnUiThread(() -> {
+                                runOnUiThread(() -> {
                                     captionText.setVisibility(View.INVISIBLE);
                                     setCaptionsVisible(false);
                                     setOptionsVisible(true);
+                                    buttonSkip.setVisibility(View.INVISIBLE);
                                 });
 
                                 SpeechInput.selectOptionWithPhraseSets(r -> onOptionSelected(r.getHeardPhrase().getText())
@@ -231,6 +272,7 @@ public class ITEEPromotionFragment extends Fragment {
 
                         setCaptionsVisible(false);
                         setOptionsVisible(true);
+                        buttonSkip.setVisibility(View.INVISIBLE);
                     });
 
 
@@ -294,6 +336,7 @@ public class ITEEPromotionFragment extends Fragment {
             captionText.setText(currentResponse.getResponseText());
             setCaptionsVisible(true);
             setOptionsVisible(false);
+            buttonSkip.setVisibility(View.VISIBLE);
         });
 
         SimpleController.say(__ -> {
@@ -302,8 +345,13 @@ public class ITEEPromotionFragment extends Fragment {
                     if(displayedContextualOptions.length > i) {
                         largeButtons[i].setText(displayedContextualOptions[i]);
                         largeButtons[i].setVisibility(View.VISIBLE);
+                        buttonSkip.setVisibility(currentResponse.getOptions() == null || currentResponse.getOptions().length == 0 ? View.INVISIBLE : View.VISIBLE);
+
+
                     } else {
                         largeButtons[i].setVisibility(View.GONE);
+                        buttonSkip.setVisibility(View.INVISIBLE);
+                        buttonSkip.setVisibility(currentResponse.getOptions() == null || currentResponse.getOptions().length == 0 ? View.INVISIBLE : View.VISIBLE);
                     }
                 }
             });
@@ -312,6 +360,8 @@ public class ITEEPromotionFragment extends Fragment {
                 captionText.setVisibility(View.INVISIBLE);
                 setCaptionsVisible(false);
                 setOptionsVisible(true);
+                buttonSkip.setVisibility(View.INVISIBLE);
+
             });
 
             SpeechInput.selectOptionWithPhraseSets(r -> onOptionSelected(r.getHeardPhrase().getText())
