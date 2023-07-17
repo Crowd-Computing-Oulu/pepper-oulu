@@ -123,4 +123,12 @@ public class SimpleController {
         // TODO: implement somehow?
         return INSTANCE;
     }
+
+    public static void stopSpeaking() {
+        if (currentSay != null) {
+            currentSay.requestCancellation(); // Cancel the speech output
+            currentSay = null; // Reset the currentSay variable
+        }
+    }
+
 }

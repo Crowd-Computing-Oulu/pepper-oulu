@@ -88,5 +88,14 @@
             android:text="@string/btn_say"
             app:layout_constraintStart_toEndOf="@+id/txtfield_say"
             app:layout_constraintTop_toTopOf="@+id/txtfield_say" />
+
+        <Switch
+            android:id="@+id/switch_motion"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="@string/disable_motions"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
