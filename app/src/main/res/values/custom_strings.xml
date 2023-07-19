@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    // ITEE offline
+
+    <string name="start_over">Start over</string>
+    <string name="hello">Hello!</string>
+    <string name="error">"Sorry, I encountered an error. Let\'s try again"</string>
+
+    <string-array name="hidden_options">
+        <item>GO_BACK</item>
+        <item>START_OVER</item>
+        <item>TURN_LEFT</item>
+        <item>TURN_RIGHT</item>
+        <item>TURN_AROUND</item>
+        <item>STEP_FORWARD</item>
+        <item>REPEAT</item>
+    </string-array>
+
+    <string-array name="hidden_option_phrase_sets">
+        <item>Go back, Back, Please go back, Back Please</item>
+        <item>Start Over, Start Again, Again, Restart</item>
+        <item>Turn Left</item>
+        <item>Turn Right</item>
+        <item>Turn Around, spin</item>
+        <item>Step Forward, forward, move forward</item>
+        <item>Repeat, Please repeat that, Say again, Say that again, Please say again, Go again, Please go again</item>
+    </string-array>
+
+
+
+
+
+
+
+    <string name="pepper_intro">Hello, I am Pepper. How may I help?</string>
+
+    <!-- Option strings for the first node -->
+    <string-array name="node_1_options">
+        <item>Hello</item>
+        <item>Tell me about yourself</item>
+        <item>Tell me about ITEE</item>
+        <item>Tell me about UBICOMP</item>
+        <item>What is Sona?</item>
+    </string-array>
+
+    <!-- Option phrases for the first node -->
+    <string-array name="node_1_option_phrases_1">
+        <item>Hi, Pepper</item>
+        <item>Hello, Pepper</item>
+        <item>Hey, Pepper</item>
+        <item>Greetings, Pepper</item>
+        <item>Good morning, Pepper</item>
+        <item>Good afternoon, Pepper</item>
+        <item>Good evening, Pepper</item>
+        <item>Hi</item>
+        <item>Hello there</item>
+        <item>Nice to meet you</item>
+        <item>Hey</item>
+    </string-array>
+
+    <string-array name="node_1_option_phrases_2">
+        <item>Tell me about yourself</item>
+        <item>What can you do?</item>
+        <item>Who are you?</item>
+        <item>Introduce yourself</item>
+        <item>What are your capabilities</item>
+        <item>What do you know?</item>
+        <item>What is your purpose</item>
+        <item>Yourself</item>
+    </string-array>
+
+    <string-array name="node_1_option_phrases_3">
+        <item>Tell me about ITEE</item>
+        <item>What is ITEE</item>
+        <item>Can you give me information on ITEE?</item>
+        <item>What does ITEE stand for</item>
+        <item>What is the ITEE department about?</item>
+        <item>I would like to know more about ITEE</item>
+        <item>What are the research areas in ITEE?</item>
+        <item>ITEE</item>
+    </string-array>
+
+    <string-array name="node_1_option_phrases_4">
+        <item>Tell me about UBICOMP</item>
+        <item>What is UBICOMP</item>
+        <item>Give me information on UBICOMP</item>
+        <item>UBICOMP</item>
+    </string-array>
+
+    <string-array name="node_1_option_phrases_5">
+        <item>Tell me about Sona</item>
+        <item>What is Sona</item>
+        <item>Details on Sona please</item>
+        <item>Sona</item>
+        <item>Sona please</item>
+    </string-array>
+
+
+
+
+    <string name="pepper_intro2">Hello, nice to meet you.</string>
+
+    <!-- Questions -->
+    <string-array name="questions">
+        <item>What can you do?</item>
+        <item>Who programmed you?</item>
+        <item>What is your purpose?</item>
+    </string-array>
+
+    <!-- Phrases for Question 1 -->
+    <string-array name="question_1_phrases">
+        <item>What can you do</item>
+        <item>Your capabilities</item>
+        <item>Your functions</item>
+        <item>Your abilities</item>
+    </string-array>
+
+    <!-- Phrases for Question 2 -->
+    <string-array name="question_2_phrases">
+        <item>Who programmed you</item>
+        <item>Who created you</item>
+        <item>Who designed your algorithms</item>
+        <item>Who wrote your code</item>
+        <item>Who developed your intelligence</item>
+    </string-array>
+
+    <!-- Phrases for Question 3 -->
+    <string-array name="question_3_phrases">
+        <item>What is your purpose</item>
+        <item>What is the purpose of your existence</item>
+        <item>Reason for your being</item>
+        <item>What motivates you</item>
+        <item>Why were you created</item>
+    </string-array>
+
+
+
+
+
+
+</resources>

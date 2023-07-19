@@ -20,6 +20,7 @@ import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
 import com.aldebaran.qi.sdk.object.conversation.SpeechEngine;
 
+import fi.oulu.danielszabo.pepper.applications.Help;
 import fi.oulu.danielszabo.pepper.applications.control.ControlFragment;
 import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.PepperStudyPromotionFragment;
 import fi.oulu.danielszabo.pepper.tools.SimpleController;
@@ -30,13 +31,14 @@ import fi.oulu.danielszabo.pepper.applications.itee_promotion_offline.ITEEPromot
 import fi.oulu.danielszabo.pepper.log.LOG;
 import fi.oulu.danielszabo.pepper.log.LogFragment;
 import fi.oulu.danielszabo.pepper.applications.sona_promotion_gpt.SonaPromotionGPTFragment;
+import fi.oulu.danielszabo.pepper.applications.action.Action;
 
 
+public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks, LogFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener, ControlFragment.OnFragmentInteractionListener, Action.OnFragmentInteractionListener, Help.OnFragmentInteractionListener {
 
-public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks, LogFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener, ControlFragment.OnFragmentInteractionListener {
 
     private Fragment fragment;
-    private ImageButton btnVolume;
+    private ImageButton btn_help, btnVolume;
     private boolean isMuted = false;
     private SpeechEngine speechEngine;
 
@@ -76,6 +78,14 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
                 audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, targetVolume, 0);
             }
         });
+
+        btn_help = findViewById(R.id.btn_help);
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAppSelectorPressed(v);
+            }
+        });
     }
 
     public void onAppSelectorPressed(View view) {
@@ -110,6 +120,14 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             }
             case R.id.btn_study: {
                 newFragment = new PepperStudyPromotionFragment();
+                break;
+            }
+            case R.id.btn_action: {
+                newFragment = new Action();
+                break;
+            }
+            case R.id.btn_help: {
+                newFragment = new Help();
                 break;
             }
             default: {
