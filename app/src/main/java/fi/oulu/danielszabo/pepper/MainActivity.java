@@ -1,9 +1,13 @@
 package fi.oulu.danielszabo.pepper;
 
+import android.content.Context;
+import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -13,9 +17,13 @@ import com.aldebaran.qi.sdk.QiContext;
 import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
+import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
+import com.aldebaran.qi.sdk.object.conversation.SpeechEngine;
 
+import fi.oulu.danielszabo.pepper.applications.Help;
 import fi.oulu.danielszabo.pepper.applications.control.ControlFragment;
 import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.PepperStudyPromotionFragment;
+import fi.oulu.danielszabo.pepper.tools.SimpleController;
 import fi.oulu.danielszabo.pepper.tools.SpeechInput;
 import fi.oulu.danielszabo.pepper.applications.gpt_prototype.GPTFragment;
 import fi.oulu.danielszabo.pepper.applications.home.HomeFragment;
@@ -23,17 +31,22 @@ import fi.oulu.danielszabo.pepper.applications.itee_promotion_offline.ITEEPromot
 import fi.oulu.danielszabo.pepper.log.LOG;
 import fi.oulu.danielszabo.pepper.log.LogFragment;
 import fi.oulu.danielszabo.pepper.applications.sona_promotion_gpt.SonaPromotionGPTFragment;
+import fi.oulu.danielszabo.pepper.applications.action.Action;
 
-public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks, LogFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener, ControlFragment.OnFragmentInteractionListener {
+
+public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks, LogFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener, ControlFragment.OnFragmentInteractionListener, Action.OnFragmentInteractionListener, Help.OnFragmentInteractionListener {
+
 
     private Fragment fragment;
+    private ImageButton btn_help, btnVolume;
+    private boolean isMuted = false;
+    private SpeechEngine speechEngine;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         LOG.debug(this, "onCreate");
-
 
         // Register the RobotLifecycleCallbacks to this Activity.
         QiSDK.register(this, this);
@@ -42,6 +55,37 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         setContentView(R.layout.activity_main);
 
         this.fragment = getSupportFragmentManager().findFragmentById(R.id.fragment);
+
+        // Add mute button and display skip button
+        btnVolume = findViewById(R.id.btn_volume);
+        btnVolume.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isMuted = !isMuted;
+                if (isMuted) {
+                    btnVolume.setImageResource(R.drawable.ic_volume_off);
+                    setSpeechOutputVolume(0.0f);
+                } else {
+                    btnVolume.setImageResource(R.drawable.ic_volume_on);
+                    setSpeechOutputVolume(0.6f);
+                }
+            }
+
+            private void setSpeechOutputVolume(float volume) {
+                AudioManager audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+                int maxVolume = audioManager.getStreamMaxVolume(AudioManager.STREAM_MUSIC);
+                int targetVolume = (int) (volume * maxVolume);
+                audioManager.setStreamVolume(AudioManager.STREAM_MUSIC, targetVolume, 0);
+            }
+        });
+
+        btn_help = findViewById(R.id.btn_help);
+        btn_help.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onAppSelectorPressed(v);
+            }
+        });
     }
 
     public void onAppSelectorPressed(View view) {
@@ -76,6 +120,14 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             }
             case R.id.btn_study: {
                 newFragment = new PepperStudyPromotionFragment();
+                break;
+            }
+            case R.id.btn_action: {
+                newFragment = new Action();
+                break;
+            }
+            case R.id.btn_help: {
+                newFragment = new Help();
                 break;
             }
             default: {

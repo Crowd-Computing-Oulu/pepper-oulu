@@ -1,5 +1,8 @@
 package fi.oulu.danielszabo.pepper.tools;
 
+import android.content.Context;
+import android.media.MediaPlayer;
+
 import com.aldebaran.qi.Consumer;
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
@@ -8,7 +11,6 @@ import com.aldebaran.qi.sdk.builder.SayBuilder;
 
 import fi.oulu.danielszabo.pepper.PepperApplication;
 import fi.oulu.danielszabo.pepper.R;
-import fi.oulu.danielszabo.pepper.log.LOG;
 
 public class SimpleController {
 
@@ -46,8 +48,10 @@ public class SimpleController {
     }
 
     public static SimpleController cancelSay() {
-        currentSay.cancel(true);
-        currentSay = null;
+        if (currentSay != null) {
+            currentSay.cancel(true);
+            currentSay = null;
+        }
         return INSTANCE;
     }
 
@@ -117,8 +121,42 @@ public class SimpleController {
         return INSTANCE;
     }
 
-    public static SimpleController setWheelLock(boolean lock) {
-        // TODO: implement somehow?
+    public static SimpleController playGuitarAnimation(Context context) {
+        MediaPlayer mediaPlayer = MediaPlayer.create(context, R.raw.without_me);
+        mediaPlayer.start();
+
+        AnimationBuilder.with(PepperApplication.qiContext)
+                .withResources(R.raw.guitar_a001)
+                .buildAsync()
+                .andThenConsume(animation -> {
+                    AnimateBuilder.with(PepperApplication.qiContext)
+                            .withAnimation(animation)
+                            .buildAsync()
+                            .andThenConsume(animate -> {
+                                animate.run();
+                                animate.run();
+                                animate.run();
+                                animate.run();
+                                animate.run();
+                                animate.run();
+                                animate.run();
+                                animate.run();
+                                animate.run();
+
+
+                            });
+                });
+
         return INSTANCE;
     }
+
+
+
+    public static void stopSpeaking() {
+        if (currentSay != null) {
+            currentSay.requestCancellation(); // Cancel the speech output
+            currentSay = null; // Reset the currentSay variable
+        }
+    }
+
 }

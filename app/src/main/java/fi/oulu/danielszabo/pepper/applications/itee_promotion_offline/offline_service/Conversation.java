@@ -12,7 +12,9 @@ public class Conversation {
 
   private final String userName = "user", robotName = "assistant";
 
-  private final OfflineConversationTree oft = new OfflineConversationTree();
+//  private final OfflineConversationTree oft = new OfflineConversationTree();
+
+  private final OfflineConversationTree oft = new OfflineConversationTree(getContext());
 
   public ResponseWithOptions respondTo(String input) {
 

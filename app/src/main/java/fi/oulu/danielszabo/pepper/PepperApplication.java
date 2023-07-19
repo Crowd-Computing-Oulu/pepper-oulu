@@ -9,5 +9,4 @@ public class PepperApplication {
     static void initialize(QiContext qiContext) {
         PepperApplication.qiContext = qiContext;
     }
-
 }
