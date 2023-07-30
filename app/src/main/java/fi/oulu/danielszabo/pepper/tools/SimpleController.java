@@ -20,7 +20,17 @@ public class SimpleController {
 
     public static SimpleController say(Consumer<Void> then, final String text) {
         if (MimicTts.isAvailable()) {
-            MimicTts.speak(text);
+            SpeechInput.pauseWhile(() -> {
+                String[] options = text.split(";");
+                String randomlySelectedOption = options[(int)(Math.random() * options.length)];
+                MimicTts.speak(randomlySelectedOption);
+                try {
+                    then.consume(null);
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            });
+            currentSay = null;
             try {
                 then.consume(null);
             } catch (Throwable throwable) {
