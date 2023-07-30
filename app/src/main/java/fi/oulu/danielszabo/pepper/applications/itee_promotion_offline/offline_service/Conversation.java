@@ -1,5 +1,7 @@
 package fi.oulu.danielszabo.pepper.applications.itee_promotion_offline.offline_service;
 
+import android.content.Context;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +14,14 @@ public class Conversation {
 
   private final String userName = "user", robotName = "assistant";
 
-  private final OfflineConversationTree oft = new OfflineConversationTree();
+//  private final OfflineConversationTree oft = new OfflineConversationTree();
+
+  private final OfflineConversationTree oft;
+
+  public Conversation(Context context) {
+    oft = new OfflineConversationTree();
+
+  }
 
   public ResponseWithOptions respondTo(String input) {
 

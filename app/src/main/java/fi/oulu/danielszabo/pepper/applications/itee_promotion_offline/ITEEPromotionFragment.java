@@ -24,7 +24,7 @@ import fi.oulu.danielszabo.pepper.log.LOG;
 public class ITEEPromotionFragment extends Fragment {
 
     private static final String CONV_ID = "c1";
-    private static final OfflinePepperService CONV_SERVICE = new OfflinePepperService();
+    private final OfflinePepperService CONV_SERVICE = new OfflinePepperService(this.getActivity());
 
     private final ITEEPromotionFragment thisITEEPromotionFragment = this;
 

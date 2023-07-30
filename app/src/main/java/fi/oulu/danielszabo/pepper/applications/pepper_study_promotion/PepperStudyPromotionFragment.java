@@ -36,7 +36,7 @@ public class PepperStudyPromotionFragment extends Fragment {
 
 //    Conversation Service
 //    private static final GPT35TurboPepperService CONV_SERVICE = new GPT35TurboPepperService(ApiConfig.API_TOKEN);
-    private static final OfflinePepperService CONV_SERVICE = new OfflinePepperService();
+    private final OfflinePepperService CONV_SERVICE = new OfflinePepperService(this.getActivity());
 
 //    Self-reference for other threads ot be able to call Activity
     private final PepperStudyPromotionFragment thisPepperStudyPromotionFragment = this;
@@ -58,13 +58,12 @@ public class PepperStudyPromotionFragment extends Fragment {
     private TextView[] optionNumbers = new TextView[5];
     private TextView hmmText, instructionText, captionText;
     private ProgressBar hmmSpinner;
-
+    private Button buttonSkip;
 
 //    latest response from the conversation service
     private ResponseWithOptions currentResponse;
 
 //    Initialisation functions
-
     private static void initHiddenOptionPhraseSets() {
         hiddenOptionPhraseSets = new String[][] {
                     new String[] {
@@ -120,7 +119,6 @@ public class PepperStudyPromotionFragment extends Fragment {
 
         // Register behavioural listeners
         PepperApplication.qiContext.getHumanAwarenessAsync().andThenConsume(ha -> ha.addOnHumansAroundChangedListener(new ApproachingHumanGreeter()));
-
     }
 
     private void initConv() {
@@ -201,8 +199,43 @@ public class PepperStudyPromotionFragment extends Fragment {
             initConv();
         }
 
+        buttonSkip = view.findViewById(R.id.button_skip);
+        buttonSkip.setOnClickListener(v -> onSkipButtonPressed(v));
+
         return view;
     }
+
+    private void onSkipButtonPressed(View view) {
+        // Stop any ongoing speech output
+        SimpleController.stopSpeaking();
+
+        updateUIWithoutResponse();
+    }
+
+    private void updateUIWithoutResponse() {
+        runOnUiThread(() -> {
+            // Update UI elements without Pepper speaking a response
+            for (int i = 0; i < largeButtons.length; i++) {
+                if (displayedContextualOptions.length > i) {
+                    largeButtons[i].setText(displayedContextualOptions[i]);
+                    largeButtons[i].setVisibility(View.VISIBLE);
+                } else {
+                    largeButtons[i].setVisibility(View.GONE);
+                }
+            }
+
+            captionText.setVisibility(View.INVISIBLE);
+            setCaptionsVisible(false);
+            setOptionsVisible(true);
+            buttonSkip.setVisibility(View.INVISIBLE);
+
+            SpeechInput.selectOptionWithPhraseSets(r -> handleSelectedOption(r.getHeardPhrase().getText())
+                    , displayedContextualOptions, allOptionPhraseSets());
+        });
+
+        SpeechInput.selectOptionWithPhraseSets(r -> handleSelectedOption(r.getHeardPhrase().getText()), displayedContextualOptions, allOptionPhraseSets());
+    }
+
 
     @Override
     public void onAttach(Context context) {
@@ -280,6 +313,7 @@ public class PepperStudyPromotionFragment extends Fragment {
                                 setCaptionsVisible(true);
                                 setOptionsVisible(false);
                                 setThinkingVisible(false);
+                                buttonSkip.setVisibility(View.VISIBLE);
                             });
 
                             SimpleController.say(__ -> {
@@ -288,7 +322,8 @@ public class PepperStudyPromotionFragment extends Fragment {
                                     captionText.setVisibility(View.INVISIBLE);
                                     setCaptionsVisible(false);
                                     setOptionsVisible(true);
-                                     setThinkingVisible(false);
+                                    setThinkingVisible(false);
+                                     buttonSkip.setVisibility(View.INVISIBLE);
                                 });
 
                                 SpeechInput.selectOptionWithPhraseSets(r -> handleSelectedOption(r.getHeardPhrase().getText())
@@ -389,6 +424,7 @@ public class PepperStudyPromotionFragment extends Fragment {
             setCaptionsVisible(true);
             setOptionsVisible(false);
             setThinkingVisible(false);
+            buttonSkip.setVisibility(View.VISIBLE);
         });
 
         SimpleController.say(__ -> {
@@ -397,8 +433,10 @@ public class PepperStudyPromotionFragment extends Fragment {
                     if(displayedContextualOptions.length > i) {
                         largeButtons[i].setText(displayedContextualOptions[i]);
                         largeButtons[i].setVisibility(View.VISIBLE);
+                        buttonSkip.setVisibility(currentResponse.getOptions() == null || currentResponse.getOptions().length == 0 ? View.INVISIBLE : View.VISIBLE);
                     } else {
                         largeButtons[i].setVisibility(View.GONE);
+                        buttonSkip.setVisibility(currentResponse.getOptions() == null || currentResponse.getOptions().length == 0 ? View.INVISIBLE : View.VISIBLE);
                     }
                 }
             });
@@ -408,6 +446,7 @@ public class PepperStudyPromotionFragment extends Fragment {
                 setCaptionsVisible(false);
                 setOptionsVisible(true);
                 setThinkingVisible(false);
+                buttonSkip.setVisibility(View.INVISIBLE);
             });
 
             SpeechInput.selectOptionWithPhraseSets(r -> handleSelectedOption(r.getHeardPhrase().getText())
@@ -432,7 +471,6 @@ public class PepperStudyPromotionFragment extends Fragment {
     }
 
 //    Screen state updater methods
-
     private void setOptionsVisible(boolean visible) {
         for (int i = 0; i < smallButtons.length; i++) {
             smallButtons[i].setVisibility(visible ? View.VISIBLE : View.INVISIBLE);

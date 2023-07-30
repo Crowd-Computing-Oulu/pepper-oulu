@@ -22,7 +22,7 @@ public class ControlFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    private Button turnLeftBtn, turnRightBtn, turnAroundBtn, stepForwardBtn, sayBtn, lockWheelsBtn, unlockWheelsBtn;
+    private Button turnLeftBtn, turnRightBtn, turnAroundBtn, stepForwardBtn, sayBtn;
     private EditText sayField;
 
     public ControlFragment() {

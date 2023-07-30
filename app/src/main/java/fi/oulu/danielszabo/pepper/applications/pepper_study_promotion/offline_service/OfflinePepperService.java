@@ -1,6 +1,8 @@
 package fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.offline_service;
 
 
+import android.content.Context;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,18 +10,21 @@ public class OfflinePepperService {
 
   private Map<String, Conversation> conversations = new HashMap<>();
 
-  public OfflinePepperService() {
+  private Context context;
+
+  public OfflinePepperService(Context context) {
+    this.context = context;
   }
 
   public Conversation startConversation(String conversationId) {
     return conversations.put(
         conversationId,
-        new Conversation());
+        new Conversation(context));
   }
 
   public void resetConversation(String conversationId) {
     if (conversations.containsKey(conversationId)) {
-      conversations.put(conversationId, new Conversation());
+      conversations.put(conversationId, new Conversation(context));
     }
   }
 
