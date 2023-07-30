@@ -5,6 +5,7 @@ import android.media.AudioFormat;
 import android.media.AudioManager;
 import android.media.AudioTrack;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.util.Log;
 import java.io.BufferedInputStream;
 import java.io.ByteArrayOutputStream;
@@ -15,17 +16,13 @@ import java.net.HttpURLConnection;
 import java.net.URL;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.CompletableFuture;
 
 import fi.oulu.danielszabo.pepper.R;
 
 public class MimicTts {
-    private static String SERVER_ENDPOINT = "http://100.79.68.64:59125/api/tts?voice=en_US/vctk_low#p240";
+    private static String SERVER_ENDPOINT = "http://100.79.68.64:59125/api/tts?voice=en_US/vctk_low#p276";
     private static Boolean serverAvailable = null;
-
-    public static void speak(String text) {
-        // Send the TTS request asynchronously
-        new TTSRequestTask().execute(text);
-    }
 
     public static boolean isAvailable() {
         if (serverAvailable == null) {
@@ -67,76 +64,92 @@ public class MimicTts {
     }
 
 
-    private static class TTSRequestTask extends AsyncTask<String, Void, byte[]> {
+    public static CompletableFuture<Void> speak(final String text) {
+        CompletableFuture<Void> future = null;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            future = new CompletableFuture<>();
+        }
 
-        @Override
-        protected byte[] doInBackground(String... params) {
-            String textToSend = params[0];
-            try {
-                URL url = new URL(SERVER_ENDPOINT);
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+            future = new CompletableFuture<>();
+        }
 
-                // Open a connection to the server
-                HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+        CompletableFuture<Void> finalFuture = future;
+        CompletableFuture<Void> finalFuture1 = future;
+        AsyncTask<Void, Void, byte[]> speechTask = new AsyncTask<Void, Void, byte[]>() {
+            @Override
+            protected byte[] doInBackground(Void... params) {
+                try {
+                    URL url = new URL(SERVER_ENDPOINT);
 
-                // Set up the request method and headers
-                connection.setRequestMethod("POST");
-                connection.setRequestProperty("Content-Type", "application/json");
-                connection.setDoOutput(true);
+                    // Open a connection to the server
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-                // Send the text to the server
-                OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
-                writer.write(textToSend);
-                writer.flush();
-                writer.close();
+                    // Set up the request method and headers
+                    connection.setRequestMethod("POST");
+                    connection.setRequestProperty("Content-Type", "application/json");
+                    connection.setDoOutput(true);
 
-                // Log the request being sent
-                Log.d("MimicTtsController", "Request sent: " + textToSend);
+                    // Send the text to the server
+                    OutputStreamWriter writer = new OutputStreamWriter(connection.getOutputStream());
+                    writer.write(text);
+                    writer.flush();
+                    writer.close();
 
-                // Get the response headers from the server
-                Map<String, List<String>> responseHeaders = connection.getHeaderFields();
-                if (responseHeaders.containsKey("Content-Type")) {
-                    List<String> contentTypeValues = responseHeaders.get("Content-Type");
-                    String contentType = contentTypeValues.get(0);
-                    Log.d("MimicTtsController", "Received Content-Type: " + contentType);
+                    // Log the request being sent
+                    Log.d("MimicTtsController", "Request sent: " + text);
+
+                    // Get the response headers from the server
+                    Map<String, List<String>> responseHeaders = connection.getHeaderFields();
+                    if (responseHeaders.containsKey("Content-Type")) {
+                        List<String> contentTypeValues = responseHeaders.get("Content-Type");
+                        String contentType = contentTypeValues.get(0);
+                        Log.d("MimicTtsController", "Received Content-Type: " + contentType);
+                    }
+
+                    // Get the response from the server
+                    InputStream inputStream = new BufferedInputStream(connection.getInputStream());
+                    byte[] audioData = readInputStream(inputStream);
+
+                    // Close the connection
+                    connection.disconnect();
+
+                    return audioData;
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-
-                // Get the response from the server
-                InputStream inputStream = new BufferedInputStream(connection.getInputStream());
-                byte[] audioData = readInputStream(inputStream);
-
-                // Close the connection
-                connection.disconnect();
-
-                return audioData;
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            return null;
-        }
-
-        @Override
-        protected void onPostExecute(byte[] audioData) {
-            // Log the received audio response
-            Log.d("MimicTtsController", "Received audio data");
-
-            // Play the received audio using Pepper's speakers
-            if (audioData != null) {
-                playAudio(audioData);
-            }
-        }
-
-        private byte[] readInputStream(InputStream inputStream) throws IOException {
-            int bufferSize = 1024;
-            byte[] buffer = new byte[bufferSize];
-            int bytesRead;
-            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-
-            while ((bytesRead = inputStream.read(buffer, 0, bufferSize)) != -1) {
-                outputStream.write(buffer, 0, bytesRead);
+                return null;
             }
 
-            return outputStream.toByteArray();
+            @Override
+            protected void onPostExecute(byte[] audioData) {
+                super.onPostExecute(audioData);
+                // Play the audio after receiving the data
+                if (audioData != null) {
+                    playAudio(audioData);
+                }
+                // Call the future's complete method to indicate that the speech is done.
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    finalFuture1.complete(null); // Move this call here after TTS is finished.
+                }
+            }
+        };
+
+        speechTask.execute();
+
+        return future;
+    }
+    private static byte[] readInputStream(InputStream inputStream) throws IOException {
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+        int bytesRead;
+        ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+
+        while ((bytesRead = inputStream.read(buffer, 0, bufferSize)) != -1) {
+            outputStream.write(buffer, 0, bytesRead);
         }
+
+        return outputStream.toByteArray();
     }
 
     private static void playAudio(byte[] audioData) {

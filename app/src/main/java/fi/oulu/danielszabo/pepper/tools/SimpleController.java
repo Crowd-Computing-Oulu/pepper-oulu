@@ -2,12 +2,15 @@ package fi.oulu.danielszabo.pepper.tools;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.os.Build;
 
 import com.aldebaran.qi.Consumer;
 import com.aldebaran.qi.Future;
 import com.aldebaran.qi.sdk.builder.AnimateBuilder;
 import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
+
+import java.util.concurrent.CompletableFuture;
 
 import fi.oulu.danielszabo.pepper.PepperApplication;
 import fi.oulu.danielszabo.pepper.R;
@@ -22,24 +25,27 @@ public class SimpleController {
         if (MimicTts.isAvailable()) {
             SpeechInput.pauseWhile(() -> {
                 String[] options = text.split(";");
-                String randomlySelectedOption = options[(int)(Math.random() * options.length)];
-                MimicTts.speak(randomlySelectedOption);
-                try {
-                    then.consume(null);
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+                String randomlySelectedOption = options[(int) (Math.random() * options.length)];
+
+                // Call MimicTts.speak(randomlySelectedOption) asynchronously using CompletableFuture
+                CompletableFuture<Void> future = MimicTts.speak(randomlySelectedOption);
+
+                // Use the then consumer when the MimicTts.speak completes
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                    future.thenAccept(result -> {
+                        try {
+                            then.consume(null);
+                        } catch (Throwable throwable) {
+                            throwable.printStackTrace();
+                        }
+                    });
                 }
             });
-            currentSay = null;
-            try {
-                then.consume(null);
-            } catch (Throwable throwable) {
-                throwable.printStackTrace();
-            }
+
         } else if (SpeechInput.isListening()) {
             SpeechInput.pauseWhile(() -> {
                 String[] options = text.split(";");
-                String randomlySelectedOption = options[(int)(Math.random() * options.length)];
+                String randomlySelectedOption = options[(int) (Math.random() * options.length)];
                 SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
                         .withText("\\rspd=90\\ \\vct=100\\" + randomlySelectedOption) // Set the text to say.
                         .build().run();
