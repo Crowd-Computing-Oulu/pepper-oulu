@@ -37,6 +37,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
     private Fragment fragment;
     private ImageButton btn_help, btnvolume;
     private boolean isMuted = false;
+    private boolean isEnglish = true;
     private SpeechEngine speechEngine;
 
     private AudioManager audioManager;
