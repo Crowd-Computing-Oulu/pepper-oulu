@@ -6,6 +6,8 @@ import android.media.AudioTrack;
 import android.os.AsyncTask;
 import android.util.Log;
 
+import com.aldebaran.qi.sdk.builder.AnimateBuilder;
+import com.aldebaran.qi.sdk.builder.AnimationBuilder;
 import com.aldebaran.qi.sdk.builder.SayBuilder;
 import com.aldebaran.qi.sdk.object.conversation.Say;
 
@@ -20,6 +22,7 @@ import java.util.List;
 import java.util.Map;
 
 import fi.oulu.danielszabo.pepper.PepperApplication;
+import fi.oulu.danielszabo.pepper.R;
 
 public class MimicTts {
     private static String SERVER_ENDPOINT = "http://100.79.68.64:59125/api/tts?voice=en_US/vctk_low#p276";
@@ -39,6 +42,7 @@ public class MimicTts {
         // Send the TTS request asynchronously
         if (isAvailable()) {
             new TTSRequestTask().execute(text);
+
         } else {
             Log.e("MimicTts", "Mimic3 server is not available. Unable to speak.");
             String errorMessage = "Mimic3 server is not available. Unable to speak.";
@@ -46,9 +50,6 @@ public class MimicTts {
                     .withText("\\rspd=90\\ \\vct=100\\" + errorMessage)
                     .buildAsync()
                     .andThenConsume(Say::run);
-
-
-
         }
     }
 
@@ -155,6 +156,19 @@ public class MimicTts {
                     playAudio(audioData);
                 }
             }).start();
+
+            // Run the animation only if the TTS request was successful (audioData is not null)
+            if (audioData != null) {
+                AnimationBuilder.with(PepperApplication.qiContext)
+                        .withResources(R.raw.enumeration_right_hand_a001)
+                        .buildAsync()
+                        .andThenCompose(animation -> AnimateBuilder.with(PepperApplication.qiContext)
+                                .withAnimation(animation)
+                                .buildAsync())
+                        .andThenConsume(animate -> {
+                            animate.run();
+                        });
+            }
         }
 
         private byte[] readInputStream(InputStream inputStream) throws IOException {
