@@ -20,11 +20,8 @@ import fi.oulu.danielszabo.pepper.PepperApplication;
 import fi.oulu.danielszabo.pepper.R;
 import fi.oulu.danielszabo.pepper.applications.itee_promotion_offline.offline_service.OfflinePepperService;
 import fi.oulu.danielszabo.pepper.applications.itee_promotion_offline.offline_service.ResponseWithOptions;
-import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.llm_service.config.ApiConfig;
 import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.listeners.ApproachingHumanGreeter;
 import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.listeners.TouchResponder;
-import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.llm_service.gpt35turbo_conversation.LLMResponseWithOptions;
-import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.llm_service.service.GPT35TurboPepperService;
 import fi.oulu.danielszabo.pepper.log.LOG;
 import fi.oulu.danielszabo.pepper.tools.SimpleController;
 import fi.oulu.danielszabo.pepper.tools.SpeechInput;
@@ -36,7 +33,7 @@ public class PepperStudyPromotionFragment extends Fragment {
 
 //    Conversation Service
 //    private static final GPT35TurboPepperService CONV_SERVICE = new GPT35TurboPepperService(ApiConfig.API_TOKEN);
-    private static final OfflinePepperService CONV_SERVICE = new OfflinePepperService();
+    private final OfflinePepperService CONV_SERVICE = new OfflinePepperService(this.getActivity());
 
 //    Self-reference for other threads ot be able to call Activity
     private final PepperStudyPromotionFragment thisPepperStudyPromotionFragment = this;

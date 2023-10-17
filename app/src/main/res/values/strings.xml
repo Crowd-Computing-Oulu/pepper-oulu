@@ -28,14 +28,28 @@
     <string name="btn_offline">Offline</string>
     <string name="btn_study">Study</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
+    <string name="btn_mute" />
+    <string name="action">Action</string>
+    <string name="instruments">Instruments</string>
+    <string name="start">START</string>
+    <string name="other">OTHER</string>
+    <string name="_1">1</string>
+    <string name="_2">2</string>
+    <string name="_3">3</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="bye">BYE</string>
+    <string name="option">[OPTION]</string>
+    <string name="hmm">Hmm…</string>
+    <string name="start_over">START OVER</string>
+    <string name="skip">SKIP</string>
+    <string name="say_or_tap_an_option">say or tap an option</string>
+
     <string name="hello_blank_fragment">Hello there, I\'m Pepper, your new robot friend!    </string>
     <string name="hello_blank_fragment2">I\'m here to make your experience enjoyable and help you get familiar with all the amazing things we can do together. Whether you want to have a chat, play games, or explore my features, I\'m always excited to be by your side. Some of the things that I can do are:</string>
     <string name="hello_blank_fragment3">Chat and Interact: I love talking to you! Ask me about anything, from simple questions to life\'s mysteries. I\'ll do my best to keep you entertained and informed.</string>
     <string name="hello_blank_fragment4">Games and Fun: Let\'s play games! We can try quizzes, riddles, and even have a dance-off. Just say the word, and we\'ll have a blast together..</string>
     <string name="hello_blank_fragment5">Useful Information: Need help with something? I can provide you with useful information like weather updates, fun facts, and more..</string>
     <string name="hello_blank_fragment6">Emotions and Reactions: I\'m equipped with sensors to understand your emotions. Whether you\'re happy or feeling down, I\'ll do my best to cheer you up and make your day better..</string>
-    <string name="btn_mute" />
-
 
 </resources>

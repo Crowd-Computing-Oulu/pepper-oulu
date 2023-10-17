@@ -89,5 +89,52 @@
             app:layout_constraintStart_toEndOf="@+id/txtfield_say"
             app:layout_constraintTop_toTopOf="@+id/txtfield_say" />
 
+        <TextView
+            android:id="@+id/txt_server"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"
+            android:text="Configuration"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_say" />
+
+        <Switch
+            android:id="@+id/switch_tts"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:checked="true"
+            android:text="Mimic3 Engine"
+            app:layout_constraintStart_toStartOf="@+id/txt_speech"
+            app:layout_constraintTop_toBottomOf="@+id/txt_server"
+            tools:ignore="MissingConstraints" />
+
+        <Switch
+            android:id="@+id/switch_stt"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="16dp"
+            android:checked="true"
+            android:text="Whisper Engine"
+            app:layout_constraintStart_toStartOf="@+id/txt_speech"
+            app:layout_constraintTop_toBottomOf="@+id/switch_tts"
+            tools:ignore="MissingConstraints" />
+
+        <!--<EditText-->
+            <!--android:id="@+id/server_ip"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="8dp"-->
+            <!--android:layout_marginTop="8dp"-->
+            <!--android:ems="20"-->
+            <!--android:inputType="textPersonName"-->
+            <!--android:hint="http://100.79.68.64:59125/api/tts"-->
+            <!--app:layout_constraintStart_toStartOf="@+id/txt_speech"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/txt_server" />-->
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>

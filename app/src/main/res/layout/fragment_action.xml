@@ -17,7 +17,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Instruments"
+            android:text="@string/instruments"
             android:textAppearance="@style/TextAppearance.AppCompat.Display1"
             tools:ignore="MissingConstraints" />
 
@@ -30,6 +30,16 @@
             android:background="@android:color/transparent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txt_instrument" />
+
+        <Button
+            android:id="@+id/testSay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Say"
+            android:layout_marginTop="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/btn_guitar"
+            tools:ignore="MissingConstraints" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
