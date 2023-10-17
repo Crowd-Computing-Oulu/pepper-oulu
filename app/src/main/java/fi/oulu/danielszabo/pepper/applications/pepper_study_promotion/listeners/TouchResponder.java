@@ -7,12 +7,15 @@ import com.aldebaran.qi.sdk.object.touch.TouchState;
 
 import fi.oulu.danielszabo.pepper.PepperApplication;
 import fi.oulu.danielszabo.pepper.tools.SimpleController;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
+
 public class TouchResponder extends CustomPepperEventListener implements TouchSensor.OnStateChangedListener {
 
     private final String sensorName;
+
+    public TouchResponder(String sensorName) {
+        this.sensorName = sensorName;
+    }
 
     @Override
     public void onStateChanged(TouchState state) {

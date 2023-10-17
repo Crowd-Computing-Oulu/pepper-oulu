@@ -12,8 +12,10 @@
     <string name="switch_info">Info</string>
 
     <string name="btn_home">Home</string>
+
     <string name="btn_control">Control</string>
     <string name="btn_log">Log</string>
+
     <string name="btn_forward">Step Forward</string>
     <string name="btn_turnleft">Turn Left</string>
     <string name="btn_turnright">Turn Right</string>
@@ -43,7 +45,6 @@
     <string name="skip">SKIP</string>
     <string name="say_or_tap_an_option">say or tap an option</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello there, I\'m Pepper, your new robot friend!    </string>
     <string name="hello_blank_fragment2">I\'m here to make your experience enjoyable and help you get familiar with all the amazing things we can do together. Whether you want to have a chat, play games, or explore my features, I\'m always excited to be by your side. Some of the things that I can do are:</string>
     <string name="hello_blank_fragment3">Chat and Interact: I love talking to you! Ask me about anything, from simple questions to life\'s mysteries. I\'ll do my best to keep you entertained and informed.</string>

@@ -10,6 +10,7 @@
 
     <string name="hello">Hello!</string>
     <string name="error">Sorry, I encountered an error. Let\'s try again</string>
+    <string name="start_over">Start over</string>
 
     <string-array name="hidden_options">
         <item>GO_BACK</item>
@@ -102,6 +103,7 @@
         <item>What is your purpose?</item>
     </string-array>
 
+    <!-- Phrases for Question 1 -->
     <string-array name="question_1_phrases">
         <item>What can you do</item>
         <item>Your capabilities</item>
@@ -109,6 +111,7 @@
         <item>Your abilities</item>
     </string-array>
 
+    <!-- Phrases for Question 2 -->
     <string-array name="question_2_phrases">
         <item>Who programmed you</item>
         <item>Who created you</item>
@@ -117,6 +120,7 @@
         <item>Who developed your intelligence</item>
     </string-array>
 
+    <!-- Phrases for Question 3 -->
     <string-array name="question_3_phrases">
         <item>What is your purpose</item>
         <item>What is the purpose of your existence</item>
@@ -312,4 +316,5 @@
     <string name="research_breakfasts_info">Infotech Institute, 6G Flagship, and ITEE Faculty jointly organize a series of ICT Research Breakfasts involving informal and relaxed chats on current research issues. We invite distinguished researchers, experts, and company representatives around different ICT topics to give short presentations followed by a discussion.</string>
 
     <string name="applications_info">More than 6400 applications were received for all the Faculty of ITEE degree programmes. In the first joint application period of the spring, there were 7 master\'s programmes and one bachelor\'s programme. The second joint application period in the spring had three bachelor\'s programmes.</string>
+
 </resources>

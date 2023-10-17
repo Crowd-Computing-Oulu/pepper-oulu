@@ -291,7 +291,7 @@ public class ITEEPromotionFragment extends Fragment {
         initConv();
 
         AsyncTask.execute(() -> {
-            SimpleController.say(__ -> {}, "Hello!");
+            SimpleController.say(__ -> {}, getActivity().getString(R.string.hello));
         });
     }
 
@@ -307,7 +307,7 @@ public class ITEEPromotionFragment extends Fragment {
         runOnUiThread(() -> {
             setCaptionsVisible(false);
             setOptionsVisible(false);
-            smallButtons[0].setText("Start over");
+            smallButtons[0].setText(R.string.start_over);
         });
 
         AsyncTask.execute(() -> {

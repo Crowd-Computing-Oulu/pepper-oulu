@@ -39,15 +39,15 @@ public class SimpleController {
         } else if (SpeechInput.isListening()) {
             SpeechInput.pauseWhile(() -> {
                 String[] options = text.split(";");
-                String randomlySelectedOption = options[(int)(Math.random() * options.length)];
+                String randomlySelectedOption = options[(int)(Math.random()*options.length)];
                 SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
                         .withText("\\rspd=90\\ \\vct=100\\" + randomlySelectedOption) // Set the text to say.
                         .build().run();
                 currentSay = null;
                 try {
                     then.consume(null);
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+                } catch (Throwable e) {
+                    new RuntimeException(e).printStackTrace();
                 }
             });
         } else {
@@ -155,34 +155,23 @@ public class SimpleController {
                             .buildAsync()
                             .andThenConsume(animate -> {
                                 animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-
-
+                                mediaPlayer.stop();
                             });
                 });
 
         return INSTANCE;
     }
 
-    // New method to play audio from a given URI
+    public static void stopSpeaking() {
+        if (currentSay != null) {
+            currentSay.requestCancellation(); // Cancel the speech output
+            currentSay = null; // Reset the currentSay variable
+        }
+    }
+
+    //  play audio from a given URI
     public static void playAudio(Uri audioUri) {
         MediaPlayer mediaPlayer = MediaPlayer.create(PepperApplication.qiContext.getApplicationContext(), audioUri);
         mediaPlayer.start();
     }
-
-
-    public static void stopSpeaking() {
-        if (currentSay != null) {
-            currentSay.requestCancellation(); // Cancel the speech output
-            currentSay = null; // Reset the currentSay
-        }
-    }
-
 }
