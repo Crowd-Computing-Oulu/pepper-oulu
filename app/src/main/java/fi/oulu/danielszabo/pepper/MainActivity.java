@@ -1,10 +1,10 @@
 package fi.oulu.danielszabo.pepper;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.media.AudioManager;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.TextView;
@@ -18,35 +18,22 @@ import com.aldebaran.qi.sdk.QiSDK;
 import com.aldebaran.qi.sdk.RobotLifecycleCallbacks;
 import com.aldebaran.qi.sdk.design.activity.RobotActivity;
 import com.aldebaran.qi.sdk.object.conversation.SpeechEngine;
-import com.aldebaran.qi.sdk.object.conversation.BodyLanguageOption;
-import com.aldebaran.qi.sdk.object.conversation.SpeechEngine;
 
-import fi.oulu.danielszabo.pepper.applications.Help;
-import fi.oulu.danielszabo.pepper.applications.control.ControlFragment;
-import fi.oulu.danielszabo.pepper.applications.pepper_study_promotion.PepperStudyPromotionFragment;
-import fi.oulu.danielszabo.pepper.tools.SimpleController;
-import fi.oulu.danielszabo.pepper.tools.SpeechInput;
-import fi.oulu.danielszabo.pepper.applications.gpt_prototype.GPTFragment;
-import fi.oulu.danielszabo.pepper.applications.home.HomeFragment;
-import fi.oulu.danielszabo.pepper.applications.itee_promotion_offline.ITEEPromotionFragment;
+import fi.oulu.danielszabo.pepper.screens.Help;
+import fi.oulu.danielszabo.pepper.screens.control.ControlFragment;
+import fi.oulu.danielszabo.pepper.screens.conv_demo.ConversationDemoFragment;
+import fi.oulu.danielszabo.pepper.screens.home.HomeFragment;
 import fi.oulu.danielszabo.pepper.log.LOG;
 import fi.oulu.danielszabo.pepper.log.LogFragment;
-import fi.oulu.danielszabo.pepper.applications.sona_promotion_gpt.SonaPromotionGPTFragment;
-import fi.oulu.danielszabo.pepper.applications.action.Action;
-
-import fi.oulu.danielszabo.pepper.applications.action.Action;
-import fi.oulu.danielszabo.pepper.tools.MimicTts;
-
+import fi.oulu.danielszabo.pepper.screens.actions.Action;
 
 public class MainActivity extends RobotActivity implements RobotLifecycleCallbacks, LogFragment.OnFragmentInteractionListener, HomeFragment.OnFragmentInteractionListener, ControlFragment.OnFragmentInteractionListener, Action.OnFragmentInteractionListener, Help.OnFragmentInteractionListener {
-
-
     private Fragment fragment;
     private ImageButton btn_help, btnvolume;
+    private TextView statusText;
     private boolean isMuted = false;
     private boolean isEnglish = true;
     private SpeechEngine speechEngine;
-
     private AudioManager audioManager;
 
 //    private TTSRequestTask ttsRequestTask;
@@ -65,6 +52,7 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         setContentView(R.layout.activity_main);
 
         audioManager = (AudioManager) getSystemService(Context.AUDIO_SERVICE);
+        statusText = (TextView) findViewById(R.id.txt_status);
 
 //        ttsRequestTask = new TTSRequestTask();
 
@@ -108,13 +96,6 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
             }
         });
 
-        btn_help = findViewById(R.id.btn_help);
-        btn_help.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onAppSelectorPressed(v);
-            }
-        });
     }
 
     public void onAppSelectorPressed(View view) {
@@ -125,18 +106,12 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         int id = view.getId();
         if (id == R.id.btn_home) {
             newFragment = new HomeFragment();
-        } else if (id == R.id.btn_gpt_prototype) {
-            newFragment = new GPTFragment();
-        } else if (id == R.id.btn_sona) {
-            newFragment = new SonaPromotionGPTFragment();
-        } else if (id == R.id.btn_control) {
+        }  else if (id == R.id.btn_control) {
             newFragment = new ControlFragment();
-        } else if (id == R.id.btn_offline) {
-            newFragment = new ITEEPromotionFragment();
-        } else if (id == R.id.btn_help) {
+        }  else if (id == R.id.btn_help) {
             newFragment = new Help();
-        } else if (id == R.id.btn_study) {
-            newFragment = new PepperStudyPromotionFragment();
+        } else if (id == R.id.btn_conv_demo) {
+            newFragment = new ConversationDemoFragment();
         } else if (id == R.id.btn_action) {
             newFragment = new Action();
         } else {
@@ -144,6 +119,16 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         }
         fragmentTransaction.replace(R.id.fragment, newFragment, this.getClass().getSimpleName());
         fragmentTransaction.commit();
+    }
+
+    public void qiContextInitialised(boolean success) {
+        runOnUiThread(() -> {
+            if (success) {
+                this.statusText.setText(R.string.status_ok);
+            } else {
+                this.statusText.setText(R.string.status_error);
+            }
+        });
     }
 
     @Override
@@ -158,12 +143,12 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         LOG.debug(this, "onRobotFocusGained");
 
         // Store context object in global application state, initialize the whole app
-        PepperApplication.initialize(qiContext);
+        PepperApplication.initialize(qiContext, this);
 
         LOG.debug(this, "Qi Context Created");
 
         // Set default fragment
-        onAppSelectorPressed(findViewById(R.id.btn_study));
+        onAppSelectorPressed(findViewById(R.id.btn_conv_demo));
     }
 
     @Override

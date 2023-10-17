@@ -18,8 +18,10 @@ public class SimpleController {
     private final static SimpleController INSTANCE = new SimpleController();
     private static Future<Void> currentSay = null;
 
+    public static final boolean REMOTE_SPEECH_SYNTHESIS_ENABLED = false;
+
     public static SimpleController say(Consumer<Void> then, final String text) {
-        if (MimicTts.isAvailable()) {
+        if (MimicTts.isAvailable() && REMOTE_SPEECH_SYNTHESIS_ENABLED) {
             SpeechInput.pauseWhile(() -> {
                 String[] options = text.split(";");
                 String randomlySelectedOption = options[(int)(Math.random() * options.length)];
@@ -42,7 +44,7 @@ public class SimpleController {
                 String randomlySelectedOption = options[(int)(Math.random()*options.length)];
                 SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
                         .withText("\\rspd=90\\ \\vct=100\\" + randomlySelectedOption) // Set the text to say.
-                        .build().run();
+                        .build().async().run();
                 currentSay = null;
                 try {
                     then.consume(null);

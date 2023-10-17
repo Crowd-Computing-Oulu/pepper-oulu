@@ -5,7 +5,7 @@
     android:id="@+id/back"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".applications.pepper_study_promotion.PepperStudyPromotionFragment">
+    tools:context=".screens.conv_demo.ConversationDemoFragment">
 
     <Button
         android:id="@+id/button_start"
@@ -311,7 +311,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/varela"
-        android:text="say or tap an option"
+        android:text="@string/option_instruction"
         android:textAllCaps="true"
         android:textColor="#FF6F00"
         android:textSize="36sp"

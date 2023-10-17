@@ -25,7 +25,7 @@
     <string name="btn_say">Say</string>
     <string name="btn_gpt_prototype">GPT</string>
     <string name="btn_sona">Sona</string>
-    <string name="btn_offline">Offline</string>
+    <string name="btn_conv_demo">Conversation</string>
     <string name="btn_study">Study</string>
 
     <string name="btn_mute" />
@@ -51,5 +51,9 @@
     <string name="hello_blank_fragment4">Games and Fun: Let\'s play games! We can try quizzes, riddles, and even have a dance-off. Just say the word, and we\'ll have a blast together..</string>
     <string name="hello_blank_fragment5">Useful Information: Need help with something? I can provide you with useful information like weather updates, fun facts, and more..</string>
     <string name="hello_blank_fragment6">Emotions and Reactions: I\'m equipped with sensors to understand your emotions. Whether you\'re happy or feeling down, I\'ll do my best to cheer you up and make your day better..</string>
+    <string name="loading">Loading...</string>
+    <string name="status_ok">OK</string>
+    <string name="status_error">ERROR</string>
+    <string name="option_instruction">SAY or TAP</string>
 
 </resources>
