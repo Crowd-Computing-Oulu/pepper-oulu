@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    // ITEE offline
+    <!-- MIMIC3 API -->
+    <string name="server_endpoint_finnish">http://100.79.68.64:59125/api/tts?voice=fi_FI/harri-tapani-ylilammi_low</string>
+    <string name="server_endpoint_english">http://100.79.68.64:59125/api/tts?voice=en_US/vctk_low#p240</string>
+    <string name="server_endpoint_local">http://192.168.145.128:59125/api/tts?voice=en_US/vctk_low#p240</string>
 
-    <string name="start_over">Start over</string>
+
+    <!-- ITEE offline -->
+
     <string name="hello">Hello!</string>
-    <string name="error">"Sorry, I encountered an error. Let\'s try again"</string>
+    <string name="error">Sorry, I encountered an error. Let\'s try again</string>
+    <string name="start_over2">Start over</string>
 
     <string-array name="hidden_options">
         <item>GO_BACK</item>
@@ -26,15 +32,10 @@
         <item>Repeat, Please repeat that, Say again, Say that again, Please say again, Go again, Please go again</item>
     </string-array>
 
-
-
-
-
-
+    <!-- Layer 1 -->
 
     <string name="pepper_intro">Hello, I am Pepper. How may I help?</string>
 
-    <!-- Option strings for the first node -->
     <string-array name="node_1_options">
         <item>Hello</item>
         <item>Tell me about yourself</item>
@@ -43,7 +44,6 @@
         <item>What is Sona?</item>
     </string-array>
 
-    <!-- Option phrases for the first node -->
     <string-array name="node_1_option_phrases_1">
         <item>Hi, Pepper</item>
         <item>Hello, Pepper</item>
@@ -95,12 +95,8 @@
         <item>Sona please</item>
     </string-array>
 
-
-
-
     <string name="pepper_intro2">Hello, nice to meet you.</string>
 
-    <!-- Questions -->
     <string-array name="questions">
         <item>What can you do?</item>
         <item>Who programmed you?</item>
@@ -133,9 +129,192 @@
         <item>Why were you created</item>
     </string-array>
 
+    <string name="pepper_intro3">I am Pepper, a humanoid social robot programmed to help you. What else would you like to know?</string>
 
+    <string-array name="questions_octn_1">
+        <item>What can you do?</item>
+        <item>Who programmed you?</item>
+        <item>What is your purpose?</item>
+    </string-array>
 
+    <string-array name="question_1_phrases_octn_1">
+        <item>What can you do</item>
+        <item>Your capabilities</item>
+        <item>Your functions</item>
+        <item>Your abilities</item>
+    </string-array>
 
+    <string-array name="question_2_phrases_octn_1">
+        <item>Who programmed you</item>
+        <item>Who created you</item>
+        <item>Who designed your algorithms</item>
+        <item>Who wrote your code</item>
+        <item>Who developed your intelligence</item>
+    </string-array>
 
+    <string-array name="question_3_phrases_octn_1">
+        <item>What is your purpose</item>
+        <item>What is the purpose of your existence</item>
+        <item>Why were you created</item>
+    </string-array>
+
+    <string name="itee_intro">ITEE stands for the Faculty of Information Technology and Electrical Engineering. What else would you like to know?</string>
+
+    <string-array name="questions_octn_2">
+        <item>What is happening at ITEE?</item>
+        <item>I want to follow ITEE</item>
+    </string-array>
+
+    <string-array name="question_1_phrases_octn_2">
+        <item>What is happening at ITEE</item>
+        <item>What\'s new at ITEE</item>
+        <item>Any news from ITEE</item>
+        <item>Updates from ITEE</item>
+        <item>Developments at ITEE</item>
+        <item>Whats happening</item>
+    </string-array>
+
+    <string-array name="question_2_phrases_octn_2">
+        <item>I want to follow ITEE</item>
+        <item>Follow ITEE</item>
+        <item>Follow</item>
+        <item>I Wanna follow ITEE</item>
+    </string-array>
+
+    <string name="ubicomp_intro">UBICOMP is the Centre for Ubiquitous Computing at the University of Oulu. It is one of the many research groups within the Faculty of ITEE. One of UBICOMP\'s main research areas is Virtual Reality and Augmented Reality, but we conduct a wide range of research. What else would you like to know?</string>
+
+    <string-array name="questions_octn_3">
+        <item>What is happening at UBICOMP?</item>
+        <item>I want to follow UBICOMP</item>
+        <item>What is Sona?</item>
+    </string-array>
+
+    <string-array name="question_1_phrases_octn_3">
+        <item>What is happening at UBICOMP</item>
+        <item>What\'s new at UBICOMP</item>
+        <item>Any news from UBICOMP</item>
+        <item>Updates from UBICOMP</item>
+        <item>Developments at UBICOMP</item>
+    </string-array>
+
+    <string-array name="question_2_phrases_octn_3">
+        <item>I want to follow UBICOMP</item>
+        <item>Follow UBICOMP</item>
+        <item>Follow</item>
+    </string-array>
+
+    <string-array name="question_3_phrases_octn_3">
+        <item>Tell me about Sona</item>
+        <item>What is Sona</item>
+        <item>Details on Sona please</item>
+    </string-array>
+
+    <string name="sona_intro">Sona is the research participant system we use at UBICOMP to invite and schedule participants for our experiments. What else would you like to know?</string>
+
+    <string-array name="questions_octn_4">
+        <item>Tell me about the experiments.</item>
+        <item>How do I sign up?</item>
+    </string-array>
+
+    <string-array name="question_1_phrases_octn_4">
+        <item>Tell me about the experiments.</item>
+        <item>Experiments</item>
+        <item>The experiments</item>
+    </string-array>
+
+    <string-array name="question_2_phrases_octn_4">
+        <item>How do I sign up</item>
+        <item>Sign up</item>
+        <item>Sign me up</item>
+        <item>Register</item>
+        <item>I want to sign up</item>
+    </string-array>
+
+    <!-- Layer 2 -->
+
+    <string name="exciting_research_info">I can help you with information about the ITEE faculty and the UBICOMP research group. We do very exciting research here, would you like to hear about it?</string>
+
+    <string-array name="questions_octn_0_0">
+        <item>Yes, tell me about ITEE</item>
+        <item>Yes, tell me about UBICOMP</item>
+        <item>No, thanks.</item>
+    </string-array>
+
+    <string-array name="question_1_phrases_octn_0_0">
+        <item>Yes, tell me about ITEE</item>
+        <item>ITEE</item>
+        <item>IT</item>
+        <item>ITE</item>
+        <item>Tell me about ITE</item>
+        <item>Tell me about ITEE</item>
+    </string-array>
+
+    <string-array name="question_2_phrases_octn_0_0">
+        <item>Yes, tell me about UBICOMP</item>
+        <item>UBICOMP</item>
+        <item>Tell me about UBICOMP</item>
+    </string-array>
+
+    <string-array name="question_3_phrases_octn_0_0">
+        <item>No</item>
+        <item>Nope</item>
+        <item>Its Okay</item>
+        <item>No thanks</item>
+        <item>No thank you</item>
+        <item>I\'m Okay</item>
+    </string-array>
+
+    <string name="research_assistant_info">I was programmed by a smart, handsome, and very humble research assistant here at ITEE.</string>
+
+    <string name="purpose_info">My purpose is to help with Human-Robot Interaction research at UBICOMP and bring joy to the life of the University of Oulu.</string>
+
+    <string name="interesting_itee_info">There is always something interesting happening at ITEE. What would you like to hear about?</string>
+
+    <string-array name="questions_octn_2_0">
+        <item>Facts about ITEE</item>
+        <item>Inventions at ITEE</item>
+        <item>Research Breakfasts</item>
+        <item>Applications to ITEE programmes</item>
+    </string-array>
+
+    <string-array name="question_1_phrases_octn_2_0">
+        <item>Facts about ITEE</item>
+        <item>Facts</item>
+    </string-array>
+
+    <string-array name="question_2_phrases_octn_2_0">
+        <item>Inventions at ITEE</item>
+        <item>Inventions</item>
+    </string-array>
+
+    <string-array name="question_3_phrases_octn_2_0">
+        <item>ICT Research Breakfasts</item>
+        <item>Breakfast</item>
+        <item>Breakfasts</item>
+    </string-array>
+
+    <string-array name="question_4_phrases_octn_2_0">
+        <item>Applications to ITEE programmes</item>
+        <item>Applications</item>
+        <item>Applications to ITEE programmes</item>
+    </string-array>
+
+    <string name="follow_us_info">You can follow us on Twitter at @ITEEOULU and on Instagram at @ITEE_UNIOULU. We regularly share inspiring stories and interesting developments and events at the faculty.</string>
+
+    <string name="recruiting_participants_info">Currently, we are busy recruiting more participants for our research participation system, Sona. It allows us to invite and manage participants for our experiments. We also share news on our website at ubicomp.oulu.fi and on Twitter at @ubicomp_oulu. One of our most important events, the UBICOMP Summer School, is coming up soon, so keep an eye out for photos from there!</string>
+
+    <string name="current_experiments_info">The available experiments are always changing. One of the currently ongoing studies investigates the accuracy of dropping objects in Virtual Reality. We monitor the participants\' heart rate with ECG, their movements with 3D trackers, and then they will fill out a questionnaire.</string>
+
+    <string name="sign_up_info">You can create an account at oulu-ubicomp.sona-systems.com. Click Request Account and enter your details, then you will be able to participate in our fun experiments and even get rewards for your help, such as movie tickets, gadgets, and university merchandise.</string>
+
+    <!-- Layer 3 -->
+
+    <string name="itee_stats_info">ITEE is the faculty with the largest number of personnel among the university\'s eight faculties. It employs over 600 people, of which 300 are doctoral researchers, and has over 2200 students. ITEE has 12 research units, 4 bachelor, and 7 master study programmes. We are also proud to be a truly international faculty with 50 different nationalities and over 50% international employees.</string>
+
+    <string name="inventions_info">Of the total 52 inventions in the University of Oulu in 2022, 26 came from the Faculty of Information and Electrical Engineering. We are happy to be the home of new inventions and excellent research!</string>
+
+    <string name="research_breakfasts_info">Infotech Institute, 6G Flagship, and ITEE Faculty jointly organize a series of ICT Research Breakfasts involving informal and relaxed chats on current research issues. We invite distinguished researchers, experts, and company representatives around different ICT topics to give short presentations followed by a discussion.</string>
+
+    <string name="applications_info">More than 6400 applications were received for all the Faculty of ITEE degree programmes. In the first joint application period of the spring, there were 7 master\'s programmes and one bachelor\'s programme. The second joint application period in the spring had three bachelor\'s programmes.</string>
 
 </resources>

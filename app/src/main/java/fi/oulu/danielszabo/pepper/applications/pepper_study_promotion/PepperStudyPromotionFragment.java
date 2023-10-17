@@ -33,7 +33,7 @@ public class PepperStudyPromotionFragment extends Fragment {
 
 //    Conversation Service
 //    private static final GPT35TurboPepperService CONV_SERVICE = new GPT35TurboPepperService(ApiConfig.API_TOKEN);
-    private static final OfflinePepperService CONV_SERVICE = new OfflinePepperService();
+    private final OfflinePepperService CONV_SERVICE = new OfflinePepperService(this.getActivity());
 
 //    Self-reference for other threads ot be able to call Activity
     private final PepperStudyPromotionFragment thisPepperStudyPromotionFragment = this;

@@ -2,6 +2,7 @@ package fi.oulu.danielszabo.pepper.tools;
 
 import android.content.Context;
 import android.media.MediaPlayer;
+import android.net.Uri;
 
 import com.aldebaran.qi.Consumer;
 import com.aldebaran.qi.Future;
@@ -15,20 +16,35 @@ import fi.oulu.danielszabo.pepper.R;
 public class SimpleController {
 
     private final static SimpleController INSTANCE = new SimpleController();
-
-    private static Future currentSay = null;
+    private static Future<Void> currentSay = null;
 
     public static SimpleController say(Consumer<Void> then, final String text) {
-        if(SpeechInput.isListening()) {
-
+        if (MimicTts.isAvailable()) {
+            SpeechInput.pauseWhile(() -> {
+                String[] options = text.split(";");
+                String randomlySelectedOption = options[(int)(Math.random() * options.length)];
+                MimicTts.speak(randomlySelectedOption);
+                try {
+                    then.consume(null);
+                } catch (Throwable throwable) {
+                    throwable.printStackTrace();
+                }
+            });
+            currentSay = null;
+            try {
+                then.consume(null);
+            } catch (Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        } else if (SpeechInput.isListening()) {
             SpeechInput.pauseWhile(() -> {
                 String[] options = text.split(";");
                 String randomlySelectedOption = options[(int)(Math.random()*options.length)];
+                SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
+                        .withText("\\rspd=90\\ \\vct=100\\" + randomlySelectedOption) // Set the text to say.
+                        .build().run();
+                currentSay = null;
                 try {
-                    SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
-                            .withText("\\rspd=90\\ \\vct=100\\" + randomlySelectedOption) // Set the text to say.
-                            .build().run();
-                    currentSay = null;
                     then.consume(null);
                 } catch (Throwable e) {
                     new RuntimeException(e).printStackTrace();
@@ -37,7 +53,12 @@ public class SimpleController {
         } else {
             SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
                     .withText("\\rspd=90\\ \\vct=100\\" + text) // Set the text to say.
-                    .buildAsync().andThenConsume(say -> currentSay = say.async().run().andThenConsume(__ -> currentSay = null).andThenConsume(then));
+                    .buildAsync()
+                    .andThenConsume(say -> {
+                        currentSay = say.async().run()
+                                .andThenConsume(__ -> currentSay = null)
+                                .andThenConsume(then);
+                    });
         }
 
         return INSTANCE;
@@ -76,10 +97,10 @@ public class SimpleController {
         AnimationBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
                 .withResources(R.raw.turn_left) // Set the animation resource.
                 .buildAsync().andThenConsume(a -> {
-                     AnimateBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
-                            .withAnimation(a) // Set the animation.
-                            .buildAsync().thenConsume(a2 -> a2.andThenConsume(a3 -> a3.run()));
-                });
+            AnimateBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
+                    .withAnimation(a) // Set the animation.
+                    .buildAsync().thenConsume(a2 -> a2.andThenConsume(a3 -> a3.run()));
+        });
 
         return INSTANCE;
     }
@@ -141,8 +162,6 @@ public class SimpleController {
         return INSTANCE;
     }
 
-
-
     public static void stopSpeaking() {
         if (currentSay != null) {
             currentSay.requestCancellation(); // Cancel the speech output
@@ -150,4 +169,9 @@ public class SimpleController {
         }
     }
 
+    //  play audio from a given URI
+    public static void playAudio(Uri audioUri) {
+        MediaPlayer mediaPlayer = MediaPlayer.create(PepperApplication.qiContext.getApplicationContext(), audioUri);
+        mediaPlayer.start();
+    }
 }
