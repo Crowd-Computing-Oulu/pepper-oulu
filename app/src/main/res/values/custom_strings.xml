@@ -10,7 +10,7 @@
 
     <string name="hello">Hello!</string>
     <string name="error">Sorry, I encountered an error. Let\'s try again</string>
-    <string name="start_over">Start over</string>
+    <string name="start_over2">Start over</string>
 
     <string-array name="hidden_options">
         <item>GO_BACK</item>
