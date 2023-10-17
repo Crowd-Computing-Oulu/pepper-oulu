@@ -24,14 +24,14 @@ public class SimpleController {
             SpeechInput.pauseWhile(() -> {
                 String[] options = text.split(";");
                 String randomlySelectedOption = options[(int)(Math.random()*options.length)];
-                SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
-                        .withText("\\rspd=90\\ \\vct=100\\" + randomlySelectedOption) // Set the text to say.
-                        .build().run();
-                currentSay = null;
                 try {
+                    SayBuilder.with(PepperApplication.qiContext) // Create the builder with the context.
+                            .withText("\\rspd=90\\ \\vct=100\\" + randomlySelectedOption) // Set the text to say.
+                            .build().run();
+                    currentSay = null;
                     then.consume(null);
-                } catch (Throwable throwable) {
-                    throwable.printStackTrace();
+                } catch (Throwable e) {
+                    new RuntimeException(e).printStackTrace();
                 }
             });
         } else {
@@ -134,16 +134,7 @@ public class SimpleController {
                             .buildAsync()
                             .andThenConsume(animate -> {
                                 animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-                                animate.run();
-
-
+                                mediaPlayer.stop();
                             });
                 });
 

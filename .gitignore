@@ -12,3 +12,4 @@
 /captures
 .externalNativeBuild
 app/src/main/java/fi/oulu/danielszabo/pepper/applications/gpt_prototype/llm_service/config/ApiConfig.java
+app/src/main/java/fi/oulu/danielszabo/pepper/applications/sona_promotion_gpt/llm_service/config/ApiConfig.java

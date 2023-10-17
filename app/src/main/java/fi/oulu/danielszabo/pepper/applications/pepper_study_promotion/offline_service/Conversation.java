@@ -5,7 +5,6 @@ import java.util.List;
 
 import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 public class Conversation {
 
   private final List<ChatMessage> convHist = initConvHist();
