@@ -93,47 +93,25 @@ public class MainActivity extends RobotActivity implements RobotLifecycleCallbac
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.setReorderingAllowed(true);
         Fragment newFragment = null;
-        switch (view.getId()) {
-            case R.id.btn_home: {
-                newFragment = new HomeFragment();
-                break;
-            }
-            case R.id.btn_log: {
-                newFragment = new LogFragment();
-                break;
-            }
-            case R.id.btn_gpt_prototype: {
-                newFragment = new GPTFragment();
-                break;
-            }
-            case R.id.btn_sona: {
-                newFragment = new SonaPromotionGPTFragment();
-                break;
-            }
-            case R.id.btn_control: {
-                newFragment = new ControlFragment();
-                break;
-            }
-            case R.id.btn_offline: {
-                newFragment = new ITEEPromotionFragment();
-                break;
-            }
-            case R.id.btn_study: {
-                newFragment = new PepperStudyPromotionFragment();
-                break;
-            }
-            case R.id.btn_action: {
-                newFragment = new Action();
-                break;
-            }
-            case R.id.btn_help: {
-                newFragment = new Help();
-                break;
-            }
-            default: {
-                newFragment = new HomeFragment();
-                break;
-            }
+        int id = view.getId();
+        if (id == R.id.btn_home) {
+            newFragment = new HomeFragment();
+        } else if (id == R.id.btn_gpt_prototype) {
+            newFragment = new GPTFragment();
+        } else if (id == R.id.btn_sona) {
+            newFragment = new SonaPromotionGPTFragment();
+        } else if (id == R.id.btn_control) {
+            newFragment = new ControlFragment();
+        } else if (id == R.id.btn_offline) {
+            newFragment = new ITEEPromotionFragment();
+        } else if (id == R.id.btn_help) {
+            newFragment = new Help();
+        } else if (id == R.id.btn_study) {
+            newFragment = new PepperStudyPromotionFragment();
+        } else if (id == R.id.btn_action) {
+            newFragment = new Action();
+        } else {
+            newFragment = new HomeFragment();
         }
         fragmentTransaction.replace(R.id.fragment, newFragment, this.getClass().getSimpleName());
         fragmentTransaction.commit();

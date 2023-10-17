@@ -3,11 +3,13 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 31
     buildToolsVersion "31"
+    namespace 'fi.oulu.danielszabo.pepper'
 
     defaultConfig {
         applicationId "fi.oulu.danielszabo.pepper_base"
         minSdkVersion 23
-        targetSdkVersion 31
+        //noinspection ExpiredTargetSdkVersion
+        targetSdkVersion 23
         versionCode 1
         versionName "1.0"
     }
@@ -16,6 +18,18 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+
+//    cool setting to reduce install time from https://github.com/softbankrobotics-labs/additional-documentation-pepper-running-naoqi-2-9-android-version/blob/master/reduce_install_time.md
+    splits {
+        // Configures multiple APKs based on ABI.
+        abi {
+            enable true
+            reset()
+            //noinspection ChromeOsAbiSupport
+            include "x86", "armeabi-v7a"
+            universalApk false
         }
     }
 
