@@ -24,7 +24,7 @@ import fi.oulu.danielszabo.pepper.log.LOG;
 public class ITEEPromotionFragment extends Fragment {
 
     private static final String CONV_ID = "c1";
-    private static final OfflinePepperService CONV_SERVICE = new OfflinePepperService();
+    private final OfflinePepperService CONV_SERVICE = new OfflinePepperService(this.getActivity());
 
     private final ITEEPromotionFragment thisITEEPromotionFragment = this;
 
@@ -291,7 +291,7 @@ public class ITEEPromotionFragment extends Fragment {
         initConv();
 
         AsyncTask.execute(() -> {
-            SimpleController.say(__ -> {}, getActivity().getString(R.string.hello));
+            SimpleController.say(__ -> {}, "Hello!");
         });
     }
 
@@ -307,7 +307,7 @@ public class ITEEPromotionFragment extends Fragment {
         runOnUiThread(() -> {
             setCaptionsVisible(false);
             setOptionsVisible(false);
-            smallButtons[0].setText(R.string.start_over);
+            smallButtons[0].setText("Start over");
         });
 
         AsyncTask.execute(() -> {

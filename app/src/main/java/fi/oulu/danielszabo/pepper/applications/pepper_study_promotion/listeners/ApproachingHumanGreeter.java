@@ -19,7 +19,8 @@ public class ApproachingHumanGreeter extends CustomPepperEventListener implement
         runWithTimeout(() -> {
 //            first person arrives to pepper
             if(lastHumansAroundList.size() == 0 && humans.size() == 1){
-                SimpleController.say("Hi! Welcome to our faculty!;Hi there! Welcome to UBICOMP.;Hey there, welcome to ITEE!");
+//                SimpleController.say("Hi! Come and fill out our survey!;Hi there! Why don't you come and fill out our survey.;Hey there, good looking!");
+                SimpleController.say("Hey there, good looking!");
 //            one more person joins
             } else if(lastHumansAroundList.size() > 0 && humans.size() > lastHumansAroundList.size()){
                 SimpleController.say("Hi!");

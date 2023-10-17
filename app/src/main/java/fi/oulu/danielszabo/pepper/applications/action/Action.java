@@ -28,13 +28,18 @@ import static fi.oulu.danielszabo.pepper.tools.SimpleController.playGuitarAnimat
 public class Action extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
+
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
+
+    private static final String SERVER_ENDPOINT = "http://192.168.145.128:59125/api/tts";
 
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
     private ImageButton btnPlayGuitar;
+
+//    private Button ttsButton;
 
     private OnFragmentInteractionListener mListener;
 
@@ -86,8 +91,17 @@ public class Action extends Fragment {
             }
         });
 
+//        ttsButton = view.findViewById(R.id.testSay);
+//        ttsButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                new TTSRequestTask().execute();
+//            }
+//        });
+
         return view;
     }
+
 
 
     // TODO: Rename method, update argument and hook method into UI event

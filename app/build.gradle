@@ -3,13 +3,11 @@ apply plugin: 'com.android.application'
 android {
     compileSdkVersion 31
     buildToolsVersion "31"
-    namespace 'fi.oulu.danielszabo.pepper'
 
     defaultConfig {
         applicationId "fi.oulu.danielszabo.pepper_base"
         minSdkVersion 23
-        //noinspection ExpiredTargetSdkVersion
-        targetSdkVersion 23
+        targetSdkVersion 31
         versionCode 1
         versionName "1.0"
     }
@@ -21,21 +19,17 @@ android {
         }
     }
 
-//    cool setting to reduce install time from https://github.com/softbankrobotics-labs/additional-documentation-pepper-running-naoqi-2-9-android-version/blob/master/reduce_install_time.md
-    splits {
-        // Configures multiple APKs based on ABI.
-        abi {
-            enable true
-            reset()
-            //noinspection ChromeOsAbiSupport
-            include "x86", "armeabi-v7a"
-            universalApk false
-        }
-    }
-
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        }
+    }
+
+    lintOptions {
+        disable 'InvalidPackage'
     }
 
 }
@@ -61,4 +55,6 @@ dependencies {
     compileOnly "org.projectlombok:lombok:1.18.26"
     annotationProcessor 'org.projectlombok:lombok:1.18.26'
     implementation 'androidx.cardview:cardview:1.0.0'
+
+
 }
