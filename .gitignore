@@ -11,3 +11,4 @@
 /build
 /captures
 .externalNativeBuild
+app/src/main/java/fi/oulu/danielszabo/pepper/applications/gpt_prototype/llm_service/config/ApiConfig.java

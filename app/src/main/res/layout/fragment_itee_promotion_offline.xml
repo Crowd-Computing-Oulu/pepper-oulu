@@ -29,6 +29,25 @@
         app:layout_constraintStart_toStartOf="@+id/txt_instruction"
         app:layout_constraintTop_toBottomOf="@+id/button_lg_5" />
 
+    <Button
+        android:id="@+id/button_skip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:backgroundTint="#FFFFFF"
+        android:fontFamily="@font/varela"
+        android:padding="16dp"
+        android:text="SKIP"
+        android:textAllCaps="true"
+        android:textColor="#FF6F00"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:visibility="invisible"
+        app:layout_constraintEnd_toEndOf="@+id/txt_instruction"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="@+id/txt_instruction"
+        app:layout_constraintTop_toBottomOf="@+id/button_lg_5" />
+
     <TextView
         android:id="@+id/txt_option_num5"
         android:layout_width="wrap_content"

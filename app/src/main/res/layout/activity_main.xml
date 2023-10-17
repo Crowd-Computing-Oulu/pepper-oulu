@@ -92,6 +92,30 @@
         app:layout_constraintStart_toEndOf="@+id/btn_offline"
         app:layout_constraintTop_toTopOf="@+id/btn_control" />
 
+    <ImageButton
+        android:id="@+id/btn_volume"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_volume_on"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/btn_mute"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_home"
+        app:layout_constraintEnd_toStartOf="@id/btn_help"
+        app:layout_constraintTop_toTopOf="@id/btn_home" />
+
+    <ImageButton
+        android:id="@+id/btn_help"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:src="@drawable/ic_help"
+        android:background="@android:color/transparent"
+        android:contentDescription="@string/btn_mute"
+        android:layout_marginBottom="30dp"
+        app:layout_constraintBottom_toBottomOf="@id/btn_home"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/btn_home" />
+
     <Button
         android:id="@+id/btn_home"
         style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
@@ -106,6 +130,23 @@
         android:textSize="12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/btn_action"
+        style="@style/Widget.MaterialComponents.MaterialCalendar.HeaderConfirmButton"
+        android:layout_width="40dp"
+        android:layout_height="30dp"
+        android:layout_marginStart="280dp"
+        android:foregroundTint="@color/design_default_color_on_primary"
+        android:onClick="onAppSelectorPressed"
+        android:padding="0dp"
+        android:text="Action"
+        android:textColor="#800085AD"
+        android:textColorHighlight="#00FFFFFF"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btn_study"
+        app:layout_constraintStart_toStartOf="parent" />
+
 
     <FrameLayout
         android:id="@+id/fragment"
