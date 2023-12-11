@@ -46,24 +46,10 @@ This package contains our own logging solution.
 
 ## Setup and Usage
 
-TODO: Write step-by-step guide for setup and usage of the application
-
-## System Requirements (Windows)
-- Android Studio 3.4
-- Pepper SDK 7
-- OpenJDK 11
-- Android Gradle Plugin 3.4.0
-- Gradle 5.1.1
-- Windows 10 (Version 10.0.19045.2846 ?)
-- Intel CPU
-
-## System Requirements (MacOS)
-
-I have not been able to launch the emulator successfully on MacOS yet.
-
-## System Requirements (Linux)
-
-- Android Studio 3.6.3
+## System Requirements
+- Linux operating system
+- Android Studio 3.4.2 OR Flamingo 2022.2.1 Patch 2
+  - [Android Studio Download Archive](https://developer.android.com/studio/archive)  
 - Pepper SDK 7
 - Oracle JRE 8 (See below)
 - Android Gradle Plugin 3.6.3
